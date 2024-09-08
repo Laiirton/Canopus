@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Matheus Santos' Creative Space</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&display=swap');
+
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      font-family: 'Montserrat', sans-serif;
+      overflow: hidden;
+    }
+
+    body {
+      background: linear-gradient(-45deg, #1a1a2e, #16213e, #0f3460, #e94560);
+      background-size: 400% 400%;
+      animation: gradient 15s ease infinite;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+    }
+
+    @keyframes gradient {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .container {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      padding: 20px;
+      position: relative;
+    }
+
+    .social-icons {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      display: flex;
+      gap: 15px;
+    }
+
+    .social-icons a {
+      color: #fff;
+      font-size: 24px;
+      transition: color 0.3s ease;
+    }
+
+    .social-icons a:hover {
+      color: #e94560;
+    }
+
+    .welcome-text {
+      font-size: 2.5vw;
+      font-weight: 600;
+      margin-top: 5vh;
+      margin-bottom: 4vh;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+      text-align: center;
+    }
+
+    .characters {
+      display: flex;
+      justify-content: center;
+      gap: 3vw;
+    }
+
+    .character {
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+
+    .character:hover {
+      transform: translateY(-10px);
+    }
+
+    .character img {
+      width: 25vw;
+      height: 50vh;
+      object-fit: cover;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+      border-radius: 10px;
+    }
+
+    .character-text {
+      margin-top: 1vh;
+      font-size: 1.2vw;
+      font-weight: 300;
+    }
+
+    .footer {
+      text-align: center;
+      padding: 10px;
+      font-size: 0.8vw;
+      background-color: rgba(0, 0, 0, 0.5);
+    }
+
+    @media (max-aspect-ratio: 1/1) {
+      .social-icons {
+        top: 10px;
+        right: 10px;
+      }
+
+      .social-icons a {
+        font-size: 20px;
+      }
+
+      .characters {
+        flex-direction: column;
+        gap: 2vh;
+      }
+
+      .character img {
+        width: 80vw;
+        height: 25vh;
+      }
+
+      .welcome-text {
+        font-size: 5vw;
+        margin-top: 10vh;
+      }
+
+      .character-text {
+        font-size: 3vw;
+      }
+
+      .footer {
+        font-size: 2vw;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="social-icons">
+      <a href="https://canopusart.neocities.org/contact" target="_blank" title="Email"><i class="fas fa-envelope"></i></a>
+      <a href="https://twitter.com/canopusart" target="_blank" title="Twitter"><i class="fab fa-twitter"></i></a>
+      <a href="https://www.instagram.com/artcanopus" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+      <a href="https://www.youtube.com/@canopusart" target="_blank" title="YouTube"><i class="fab fa-youtube"></i></a>
+    </div>
+
+    <p class="welcome-text">Welcome to my creative space</p>
+
+    <div class="characters">
+      <div class="character">
+        <img src="/assets/img/character1.png" alt="Projects">
+        <p class="character-text">Projects</p>
+      </div>
+      <div class="character">
+        <img src="/assets/img/character2.png" alt="Blog">
+        <p class="character-text">Blog</p>
+      </div>
+      <div class="character">
+        <img src="/assets/img/character3.png" alt="Music">
+        <p class="character-text">Music</p>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <p>© 2024 Matheus Santos | @canopus</p>
+  </footer>
+</body>
+</html>
