@@ -102,7 +102,6 @@
                 object-fit: cover;
                 box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
                 border-radius: 10px;
-                transition: opacity 0.3s ease;
             }
 
             /* Define o estilo do texto abaixo das imagens dos personagens */
@@ -154,11 +153,6 @@
                     font-size: 2vw;
                 }
             }
-
-            /* Novo estilo para os cards não destacados */
-            .character.dimmed img {
-                opacity: 0.3;
-            }
         </style>
     </head>
     <body>
@@ -196,15 +190,15 @@
 
             <!-- Seção de personagens/categorias -->
             <div class="characters">
-                <div class="character" onmouseover="highlightCard(this, '#211412')" onmouseout="resetCards()">
+                <div class="character" onmouseover="changeBackground('#211412')" onmouseout="resetBackground()">
                     <img src="/assets/images/projects.jpg" alt="Projects" />
                     <p class="character-text">Projects</p>
                 </div>
-                <div class="character" onmouseover="highlightCard(this, '#ed943b')" onmouseout="resetCards()">
+                <div class="character" onmouseover="changeBackground('#ed943b')" onmouseout="resetBackground()">
                     <img src="/assets/images/blog.jpg" alt="Blog" />
                     <p class="character-text">Blog</p>
                 </div>
-                <div class="character" onmouseover="highlightCard(this, '#4a4a4a')" onmouseout="resetCards()">
+                <div class="character">
                     <img src="/assets/images/music.jpg" alt="Music" />
                     <p class="character-text">Music</p>
                 </div>
@@ -217,24 +211,14 @@
         </footer>
 
         <script>
-            function highlightCard(card, color) {
+            function changeBackground(color) {
                 document.body.style.backgroundImage = 'none';
                 document.body.style.backgroundColor = color;
-
-                const cards = document.querySelectorAll('.character');
-                cards.forEach(c => {
-                    if (c !== card) {
-                        c.classList.add('dimmed');
-                    }
-                });
             }
 
-            function resetCards() {
+            function resetBackground() {
                 document.body.style.backgroundImage = 'url("/assets/images/background.png")';
                 document.body.style.backgroundColor = '';
-
-                const cards = document.querySelectorAll('.character');
-                cards.forEach(c => c.classList.remove('dimmed'));
             }
         </script>
     </body>
