@@ -4,16 +4,13 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Matheus Santos' Creative Space</title>
-        <!-- Importa ícones do Font Awesome para usar nas redes sociais -->
         <link
             rel="stylesheet"
             href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
         />
         <style>
-            /* Importa a fonte Montserrat do Google Fonts */
             @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&display=swap");
 
-            /* Define estilos básicos para o html e body */
             html,
             body {
                 height: 100%;
@@ -23,7 +20,6 @@
                 overflow: hidden;
             }
 
-            /* Define o fundo e a estrutura básica do corpo da página */
             body {
                 background-image: url("/assets/images/background.png");
                 background-size: cover;
@@ -35,7 +31,6 @@
                 transition: background-color 0.3s ease;
             }
 
-            /* Define o estilo do contêiner principal */
             .container {
                 flex: 1;
                 display: flex;
@@ -46,7 +41,6 @@
                 position: relative;
             }
 
-            /* Posiciona os ícones de redes sociais no canto superior direito */
             .social-icons {
                 position: absolute;
                 top: 20px;
@@ -55,19 +49,16 @@
                 gap: 15px;
             }
 
-            /* Define o estilo dos links de redes sociais */
             .social-icons a {
                 color: #fff;
                 font-size: 24px;
                 transition: color 0.3s ease;
             }
 
-            /* Muda a cor dos ícones ao passar o mouse */
             .social-icons a:hover {
                 color: #e94560;
             }
 
-            /* Define o estilo do texto de boas-vindas */
             .welcome-text {
                 font-size: 2.5vw;
                 font-weight: 600;
@@ -77,25 +68,22 @@
                 text-align: center;
             }
 
-            /* Define o layout dos elementos de personagem */
             .characters {
                 display: flex;
                 justify-content: center;
                 gap: 3vw;
             }
 
-            /* Define o estilo de cada elemento de personagem */
             .character {
                 text-align: center;
                 transition: all 0.3s ease;
+                cursor: pointer;
             }
 
-            /* Adiciona animação ao passar o mouse sobre o personagem */
             .character:hover {
                 transform: translateY(-10px);
             }
 
-            /* Define o estilo das imagens dos personagens */
             .character img {
                 width: 25vw;
                 height: 50vh;
@@ -104,14 +92,12 @@
                 border-radius: 10px;
             }
 
-            /* Define o estilo do texto abaixo das imagens dos personagens */
             .character-text {
                 margin-top: 1vh;
                 font-size: 1.2vw;
                 font-weight: 300;
             }
 
-            /* Define o estilo do rodapé */
             .footer {
                 text-align: center;
                 padding: 10px;
@@ -119,7 +105,6 @@
                 background-color: rgba(0, 0, 0, 0.5);
             }
 
-            /* Estilos para dispositivos com tela vertical (como smartphones) */
             @media (max-aspect-ratio: 1/1) {
                 .social-icons {
                     top: 10px;
@@ -157,7 +142,6 @@
     </head>
     <body>
         <div class="container">
-            <!-- Ícones de redes sociais -->
             <div class="social-icons">
                 <a
                     href="https://canopusart.neocities.org/contact"
@@ -185,38 +169,85 @@
                 ></a>
             </div>
 
-            <!-- Texto de boas-vindas -->
             <p class="welcome-text">Welcome to my creative space</p>
 
-            <!-- Seção de personagens/categorias -->
             <div class="characters">
-                <div class="character" onmouseover="changeBackground('#211412')" onmouseout="resetBackground()">
+                <div class="character" id="project-card" onclick="setPermanentState('projects')" onmouseover="changeImagesAndBackground('projects')" onmouseout="resetImages()">
                     <img src="/assets/images/projects.jpg" alt="Projects" />
                     <p class="character-text">Projects</p>
                 </div>
-                <div class="character" onmouseover="changeBackground('#ed943b')" onmouseout="resetBackground()">
+                <div class="character" id="blog-card" onclick="setPermanentState('blog')" onmouseover="changeImagesAndBackground('blog')" onmouseout="resetImages()">
                     <img src="/assets/images/blog.jpg" alt="Blog" />
                     <p class="character-text">Blog</p>
                 </div>
-                <div class="character">
+                <div class="character" id="music-card" onclick="setPermanentState('music')" onmouseover="changeImagesAndBackground('music')" onmouseout="resetImages()">
                     <img src="/assets/images/music.jpg" alt="Music" />
                     <p class="character-text">Music</p>
                 </div>
             </div>
         </div>
 
-        <!-- Rodapé com informações de direitos autorais -->
         <footer class="footer">
             <p>© 2024 Matheus Santos | @canopus</p>
         </footer>
 
         <script>
-            function changeBackground(color) {
-                document.body.style.backgroundImage = 'none';
-                document.body.style.backgroundColor = color;
+            let permanentState = null;
+
+            // Função que altera as imagens e o fundo temporariamente ao passar o mouse
+            function changeImagesAndBackground(category) {
+                if (permanentState) return; // Se já houver um estado permanente, não altera
+                changeImages(category);
+                changeBackground(category);
             }
 
+            // Função que altera permanentemente as imagens e o fundo ao clicar
+            function setPermanentState(category) {
+                permanentState = category;
+                changeImages(category);
+                changeBackground(category);
+            }
+
+            // Função para resetar as imagens ao remover o mouse
+            function resetImages() {
+                if (permanentState) return; // Se houver estado permanente, não reseta
+                document.getElementById('project-card').querySelector('img').src = '/assets/images/projects.jpg';
+                document.getElementById('blog-card').querySelector('img').src = '/assets/images/blog.jpg';
+                document.getElementById('music-card').querySelector('img').src = '/assets/images/music.jpg';
+                resetBackground();
+            }
+
+            // Função que altera as imagens com base no card selecionado
+            function changeImages(category) {
+                if (category === 'projects') {
+                    document.getElementById('blog-card').querySelector('img').src = '/assets/images/blog_posterize_brown.jpg';
+                    document.getElementById('music-card').querySelector('img').src = '/assets/images/music_posterize_brown.jpg';
+                } else if (category === 'blog') {
+                    document.getElementById('project-card').querySelector('img').src = '/assets/images/other-projects.jpg';
+                    document.getElementById('music-card').querySelector('img').src = '/assets/images/other-music.jpg';
+                } else if (category === 'music') {
+                    document.getElementById('project-card').querySelector('img').src = '/assets/images/other-projects.jpg';
+                    document.getElementById('blog-card').querySelector('img').src = '/assets/images/other-blog.jpg';
+                }
+            }
+
+            // Função que altera a cor do background com base no card selecionado
+            function changeBackground(category) {
+                if (category === 'projects') {
+                    document.body.style.backgroundImage = 'none';
+                    document.body.style.backgroundColor = '#211412';
+                } else if (category === 'blog') {
+                    document.body.style.backgroundImage = 'none';
+                    document.body.style.backgroundColor = '#ed943b';
+                } else if (category === 'music') {
+                    document.body.style.backgroundImage = 'none';
+                    document.body.style.backgroundColor = '#0e44c2';
+                }
+            }
+
+            // Função que reseta o background
             function resetBackground() {
+                if (permanentState) return; // Se houver estado permanente, não reseta
                 document.body.style.backgroundImage = 'url("/assets/images/background.png")';
                 document.body.style.backgroundColor = '';
             }
