@@ -23,16 +23,17 @@
                 overflow: hidden;
             }
 
-    /* Define o fundo e a estrutura básica do corpo da página */
-    body { 
-      background-image: url("assets/images/background.png");
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      color: #fff;
-      display: flex;
-      flex-direction: column;
-    }
+            /* Define o fundo e a estrutura básica do corpo da página */
+            body {
+                background-image: url("/assets/images/background.png");
+                background-size: cover;
+                background-position: center;
+                background-repeat: no-repeat;
+                color: #fff;
+                display: flex;
+                flex-direction: column;
+                transition: background-color 0.3s ease;
+            }
 
             /* Define o estilo do contêiner principal */
             .container {
@@ -189,11 +190,11 @@
 
             <!-- Seção de personagens/categorias -->
             <div class="characters">
-                <div class="character">
+                <div class="character" onmouseover="changeBackground('#211412')" onmouseout="resetBackground()">
                     <img src="/assets/images/projects.jpg" alt="Projects" />
                     <p class="character-text">Projects</p>
                 </div>
-                <div class="character">
+                <div class="character" onmouseover="changeBackground('#ed943b')" onmouseout="resetBackground()">
                     <img src="/assets/images/blog.jpg" alt="Blog" />
                     <p class="character-text">Blog</p>
                 </div>
@@ -208,5 +209,17 @@
         <footer class="footer">
             <p>© 2024 Matheus Santos | @canopus</p>
         </footer>
+
+        <script>
+            function changeBackground(color) {
+                document.body.style.backgroundImage = 'none';
+                document.body.style.backgroundColor = color;
+            }
+
+            function resetBackground() {
+                document.body.style.backgroundImage = 'url("/assets/images/background.png")';
+                document.body.style.backgroundColor = '';
+            }
+        </script>
     </body>
 </html>
