@@ -71,13 +71,15 @@
             .characters {
                 display: flex;
                 justify-content: center;
-                gap: 3vw;
+                gap: 2vw;
+                flex-wrap: wrap;
             }
 
             .character {
                 text-align: center;
                 transition: all 0.3s ease;
                 cursor: pointer;
+                width: 22vw;
             }
 
             .character:hover {
@@ -85,8 +87,8 @@
             }
 
             .character img {
-                width: 25vw;
-                height: 50vh;
+                width: 100%;
+                height: 40vh;
                 object-fit: cover;
                 box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
                 border-radius: 10px;
@@ -120,8 +122,11 @@
                     gap: 2vh;
                 }
 
-                .character img {
+                .character {
                     width: 80vw;
+                }
+
+                .character img {
                     height: 25vh;
                 }
 
@@ -172,17 +177,45 @@
             <p class="welcome-text">Welcome to my creative space</p>
 
             <div class="characters">
-                <div class="character" id="project-card" onclick="setPermanentState('projects')" onmouseover="changeImagesAndBackground('projects')" onmouseout="resetImages()">
+                <div
+                    class="character"
+                    id="project-card"
+                    onclick="setPermanentState('projects')"
+                    onmouseover="changeImagesAndBackground('projects')"
+                    onmouseout="resetImages()"
+                >
                     <img src="/assets/images/projects.jpg" alt="Projects" />
                     <p class="character-text">Projects</p>
                 </div>
-                <div class="character" id="blog-card" onclick="setPermanentState('blog')" onmouseover="changeImagesAndBackground('blog')" onmouseout="resetImages()">
+                <div
+                    class="character"
+                    id="blog-card"
+                    onclick="setPermanentState('blog')"
+                    onmouseover="changeImagesAndBackground('blog')"
+                    onmouseout="resetImages()"
+                >
                     <img src="/assets/images/blog.jpg" alt="Blog" />
                     <p class="character-text">Blog</p>
                 </div>
-                <div class="character" id="music-card" onclick="setPermanentState('music')" onmouseover="changeImagesAndBackground('music')" onmouseout="resetImages()">
+                <div
+                    class="character"
+                    id="music-card"
+                    onclick="setPermanentState('music')"
+                    onmouseover="changeImagesAndBackground('music')"
+                    onmouseout="resetImages()"
+                >
                     <img src="/assets/images/music.jpg" alt="Music" />
                     <p class="character-text">Music</p>
+                </div>
+                <div
+                    class="character"
+                    id="games-card"
+                    onclick="setPermanentState('games')"
+                    onmouseover="changeImagesAndBackground('games')"
+                    onmouseout="resetImages()"
+                >
+                    <img src="/assets/images/games.png" alt="Games" />
+                    <p class="character-text">Games</p>
                 </div>
             </div>
         </div>
@@ -194,62 +227,67 @@
         <script>
             let permanentState = null;
 
-            // Função que altera as imagens e o fundo temporariamente ao passar o mouse
             function changeImagesAndBackground(category) {
-                if (permanentState) return; // Se já houver um estado permanente, não altera
+                if (permanentState) return;
                 changeImages(category);
                 changeBackground(category);
             }
 
-            // Função que altera permanentemente as imagens e o fundo ao clicar
             function setPermanentState(category) {
                 permanentState = category;
                 changeImages(category);
                 changeBackground(category);
             }
 
-            // Função para resetar as imagens ao remover o mouse
             function resetImages() {
-                if (permanentState) return; // Se houver estado permanente, não reseta
-                document.getElementById('project-card').querySelector('img').src = '/assets/images/projects.jpg';
-                document.getElementById('blog-card').querySelector('img').src = '/assets/images/blog.jpg';
-                document.getElementById('music-card').querySelector('img').src = '/assets/images/music.jpg';
+                if (permanentState) return;
+                document.getElementById("project-card").querySelector("img").src = "/assets/images/projects.jpg";
+                document.getElementById("blog-card").querySelector("img").src = "/assets/images/blog.jpg";
+                document.getElementById("music-card").querySelector("img").src = "/assets/images/music.jpg";
+                document.getElementById("games-card").querySelector("img").src = "/assets/images/games.png";
                 resetBackground();
             }
 
-            // Função que altera as imagens com base no card selecionado
             function changeImages(category) {
-                if (category === 'projects') {
-                    document.getElementById('blog-card').querySelector('img').src = '/assets/images/blog_posterize_brown.jpg';
-                    document.getElementById('music-card').querySelector('img').src = '/assets/images/music_posterize_brown.jpg';
-                } else if (category === 'blog') {
-                    document.getElementById('project-card').querySelector('img').src = '/assets/images/other-projects.jpg';
-                    document.getElementById('music-card').querySelector('img').src = '/assets/images/other-music.jpg';
-                } else if (category === 'music') {
-                    document.getElementById('project-card').querySelector('img').src = '/assets/images/other-projects.jpg';
-                    document.getElementById('blog-card').querySelector('img').src = '/assets/images/other-blog.jpg';
+                if (category === "projects") {
+                    document.getElementById("blog-card").querySelector("img").src = "/assets/images/blog_posterize_brown.jpg";
+                    document.getElementById("music-card").querySelector("img").src = "/assets/images/music_posterize_brown.jpg";
+                    document.getElementById("games-card").querySelector("img").src = "/assets/images/games_posterize_brown.jpg";
+                } else if (category === "blog") {
+                    document.getElementById("project-card").querySelector("img").src = "/assets/images/other-projects.jpg";
+                    document.getElementById("music-card").querySelector("img").src = "/assets/images/other-music.jpg";
+                    document.getElementById("games-card").querySelector("img").src = "/assets/images/other-games.jpg";
+                } else if (category === "music") {
+                    document.getElementById("project-card").querySelector("img").src = "/assets/images/other-projects.jpg";
+                    document.getElementById("blog-card").querySelector("img").src = "/assets/images/other-blog.jpg";
+                    document.getElementById("games-card").querySelector("img").src = "/assets/images/other-games.jpg";
+                } else if (category === "games") {
+                    document.getElementById("project-card").querySelector("img").src = "/assets/images/other-projects.jpg";
+                    document.getElementById("blog-card").querySelector("img").src = "/assets/images/other-blog.jpg";
+                    document.getElementById("music-card").querySelector("img").src = "/assets/images/other-music.jpg";
                 }
             }
 
-            // Função que altera a cor do background com base no card selecionado
             function changeBackground(category) {
-                if (category === 'projects') {
-                    document.body.style.backgroundImage = 'none';
-                    document.body.style.backgroundColor = '#211412';
-                } else if (category === 'blog') {
-                    document.body.style.backgroundImage = 'none';
-                    document.body.style.backgroundColor = '#ed943b';
-                } else if (category === 'music') {
-                    document.body.style.backgroundImage = 'none';
-                    document.body.style.backgroundColor = '#0e44c2';
+                if (category === "projects") {
+                    document.body.style.backgroundImage = "none";
+                    document.body.style.backgroundColor = "#211412";
+                } else if (category === "blog") {
+                    document.body.style.backgroundImage = "none";
+                    document.body.style.backgroundColor = "#ed943b";
+                } else if (category === "music") {
+                    document.body.style.backgroundImage = "none";
+                    document.body.style.backgroundColor = "#0e44c2";
+                } else if (category === "games") {
+                    document.body.style.backgroundImage = "none";
+                    document.body.style.backgroundColor = "#4a0e51";
                 }
             }
 
-            // Função que reseta o background
             function resetBackground() {
-                if (permanentState) return; // Se houver estado permanente, não reseta
+                if (permanentState) return;
                 document.body.style.backgroundImage = 'url("/assets/images/background.png")';
-                document.body.style.backgroundColor = '';
+                document.body.style.backgroundColor = "";
             }
         </script>
     </body>
