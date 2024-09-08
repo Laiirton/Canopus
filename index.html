@@ -4,10 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Matheus Santos' Creative Space</title>
+  <!-- Importa ícones do Font Awesome para usar nas redes sociais -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
+    /* Importa a fonte Montserrat do Google Fonts */
     @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&display=swap');
 
+    /* Define estilos básicos para o html e body */
     html, body {
       height: 100%;
       margin: 0;
@@ -16,21 +19,17 @@
       overflow: hidden;
     }
 
+    /* Define o fundo e a estrutura básica do corpo da página */
     body {
-      background: linear-gradient(-45deg, #1a1a2e, #16213e, #0f3460, #e94560);
-      background-size: 400% 400%;
-      animation: gradient 15s ease infinite;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
       color: #fff;
       display: flex;
       flex-direction: column;
     }
 
-    @keyframes gradient {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-
+    /* Define o estilo do contêiner principal */
     .container {
       flex: 1;
       display: flex;
@@ -41,6 +40,7 @@
       position: relative;
     }
 
+    /* Posiciona os ícones de redes sociais no canto superior direito */
     .social-icons {
       position: absolute;
       top: 20px;
@@ -49,16 +49,19 @@
       gap: 15px;
     }
 
+    /* Define o estilo dos links de redes sociais */
     .social-icons a {
       color: #fff;
       font-size: 24px;
       transition: color 0.3s ease;
     }
 
+    /* Muda a cor dos ícones ao passar o mouse */
     .social-icons a:hover {
       color: #e94560;
     }
 
+    /* Define o estilo do texto de boas-vindas */
     .welcome-text {
       font-size: 2.5vw;
       font-weight: 600;
@@ -68,21 +71,25 @@
       text-align: center;
     }
 
+    /* Define o layout dos elementos de personagem */
     .characters {
       display: flex;
       justify-content: center;
       gap: 3vw;
     }
 
+    /* Define o estilo de cada elemento de personagem */
     .character {
       text-align: center;
       transition: all 0.3s ease;
     }
 
+    /* Adiciona animação ao passar o mouse sobre o personagem */
     .character:hover {
       transform: translateY(-10px);
     }
 
+    /* Define o estilo das imagens dos personagens */
     .character img {
       width: 25vw;
       height: 50vh;
@@ -91,12 +98,14 @@
       border-radius: 10px;
     }
 
+    /* Define o estilo do texto abaixo das imagens dos personagens */
     .character-text {
       margin-top: 1vh;
       font-size: 1.2vw;
       font-weight: 300;
     }
 
+    /* Define o estilo do rodapé */
     .footer {
       text-align: center;
       padding: 10px;
@@ -104,6 +113,7 @@
       background-color: rgba(0, 0, 0, 0.5);
     }
 
+    /* Estilos para dispositivos com tela vertical (como smartphones) */
     @media (max-aspect-ratio: 1/1) {
       .social-icons {
         top: 10px;
@@ -141,6 +151,7 @@
 </head>
 <body>
   <div class="container">
+    <!-- Ícones de redes sociais -->
     <div class="social-icons">
       <a href="https://canopusart.neocities.org/contact" target="_blank" title="Email"><i class="fas fa-envelope"></i></a>
       <a href="https://twitter.com/canopusart" target="_blank" title="Twitter"><i class="fab fa-twitter"></i></a>
@@ -148,8 +159,10 @@
       <a href="https://www.youtube.com/@canopusart" target="_blank" title="YouTube"><i class="fab fa-youtube"></i></a>
     </div>
 
+    <!-- Texto de boas-vindas -->
     <p class="welcome-text">Welcome to my creative space</p>
 
+    <!-- Seção de personagens/categorias -->
     <div class="characters">
       <div class="character">
         <img src="/assets/images/projects.jpg" alt="Projects">
@@ -166,6 +179,7 @@
     </div>
   </div>
 
+  <!-- Rodapé com informações de direitos autorais -->
   <footer class="footer">
     <p>© 2024 Matheus Santos | @canopus</p>
   </footer>
