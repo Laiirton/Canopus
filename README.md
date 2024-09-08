@@ -1,2 +1,2 @@
 # Canopus
- Portfólio de apresentação de trabalho feito para Matheus Santos.
+ Portfólio de trabalho feito para Matheus Santos.
