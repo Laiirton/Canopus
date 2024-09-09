@@ -251,14 +251,7 @@
             function changeImages(category) {
                 if (category === "projects") {
 
-            //
-                    var entidade = document.getElementById('project-card');
-
-            // PROJECTS Altere o número para a apliação/redução desejada
-            var fator_lupa = 2;
-
-            entidade.onmouseover = function () { this.style.width = (this.clientWidth * fator_lupa) + "px"; };
-            entidade.onmouseout = function () { this.style.width = (this.clientWidth / fator_lupa) + "px"; };
+          
 
                     document.getElementById("project-card").querySelector("img").src = "/assets/images/projects_select.jpg";
                     document.getElementById("blog-card").querySelector("img").src = "/assets/images/blog_posterize_brown.jpg";
@@ -266,39 +259,21 @@
                     document.getElementById("games-card").querySelector("img").src = "/assets/images/games_brown.jpg";
                 } else if (category === "blog") {
 
-                    var entidade = document.getElementById('blog-card');
-
-                    // BLOG --  Altere o número para a apliação/redução desejada
-                    var fator_lupa = 2;
-
-                    entidade.onmouseover = function () { this.style.width = (this.clientWidth * fator_lupa) + "px"; };
-                    entidade.onmouseout = function () { this.style.width = (this.clientWidth / fator_lupa) + "px"; };
+                
 
                     document.getElementById("blog-card").querySelector("img").src = "/assets/images/blog_select.jpg";
                     document.getElementById("project-card").querySelector("img").src = "/assets/images/projects_yellow.jpg";
                     document.getElementById("music-card").querySelector("img").src = "/assets/images/music_yellow2.jpg";
                     document.getElementById("games-card").querySelector("img").src = "/assets/images/games_yellow.jpg";
                 } else if (category === "music") {
-                     // MUSIC --  Altere o número para a apliação/redução desejada
-                     var entidade = document.getElementById('music-card');
-
-                    var fator_lupa = 1.5;
-
-entidade.onmouseover = function () { this.style.width = (this.clientWidth * fator_lupa) + "px"; };
-entidade.onmouseout = function () { this.style.width = (this.clientWidth / fator_lupa) + "px"; };
+                
                     document.getElementById("music-card").querySelector("img").src = "/assets/images/music.jpg";
 
                     document.getElementById("project-card").querySelector("img").src = "/assets/images/projects_blue.jpg";
                     document.getElementById("blog-card").querySelector("img").src = "/assets/images/blog_blue.jpg";
                     document.getElementById("games-card").querySelector("img").src = "/assets/images/games_blue.jpg";
                 } else if (category === "games") {
-                           // GAMES --  Altere o número para a apliação/redução desejada
-                           var entidade = document.getElementById('games-card');
-
-                           var fator_lupa = 2;
-
-entidade.onmouseover = function () { this.style.width = (this.clientWidth * fator_lupa) + "px"; };
-entidade.onmouseout = function () { this.style.width = (this.clientWidth / fator_lupa) + "px"; };
+   
                     document.getElementById("games-card").querySelector("img").src = "/assets/images/games.png";
                    
                     document.getElementById("project-card").querySelector("img").src = "/assets/images/projects_red.jpg";
