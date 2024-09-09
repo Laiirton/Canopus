@@ -83,12 +83,12 @@
             }
 
             .character:hover {
-                transform: translateY(-10px);
+                transform: translateY(-40px);
             }
 
             .character img {
                 width: 100%;
-                height: 60vh;
+                height: 55vh;
                 object-fit: cover;
                 box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
                 border-radius: 10px;
@@ -247,9 +247,11 @@
                 document.getElementById("games-card").querySelector("img").src = "/assets/images/games3.jpg";
                 resetBackground();
             }
-
+            
+            // CARDS 
             function changeImages(category) {
                 if (category === "projects") {
+
 
 
                     document.getElementById("project-card").querySelector("img").src = "/assets/images/projects_select.jpg";
