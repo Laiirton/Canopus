@@ -21,7 +21,7 @@
             }
 
             body {
-                background-image: url("/assets/images/bg-color9.png");
+                background-image: url("/assets/images/bg-color9.1.png");
                 background-size: cover;
                 background-position: center;
                 background-repeat: no-repeat;
@@ -83,7 +83,7 @@
             }
 
             .character:hover {
-                transform: translateY(-30px);
+                transform: translateY(-50px);
             }
 
             .character img {
@@ -94,14 +94,41 @@
                 border-radius: 10px;
             }
 
-            .character:hover img {
-                height: 60vh; /* altura quando hover */ }
-                clip-path: polygon(50% 0%, 100% 100%, 0% 100%); 
+            /* Cards Shapes */
+
+            #project-card:hover img {
+
+                height: 60vh;
+                clip-path: polygon(75% -100%, 100% 75%, -25% 100%); /* Triângulo apontando para baixo */
+                
+            }
+
+            #blog-card:hover img {
+                height: 60vh;
+                clip-path: ellipse(50% 100% at 50% 50%);
+
+            }
+
+            #music-card:hover img {
+                height: 60vh;
+                clip-path: polygon(25% 0%, 100% 0%, 75% 100%, 0% 100%);
+
+            }
+
+            #games-card:hover img {
+                height: 60vh;
+                clip-path: polygon(20% 0%, 0% 20%, 30% 50%, 0% 80%, 20% 100%, 50% 70%, 80% 100%, 100% 80%, 70% 50%, 100% 20%, 80% 0%, 50% 30%);
+
+            }
+
+            /* ---- MUDANÇA DA FONTE  */
+
+            /* ---   */
 
             .character-text {
                 margin-top: 1vh;
-                font-size: 1.2vw;
-                font-weight: 300;
+                font-size: 2.2vw;
+                font-weight: 450;
             }
 
             .footer {
@@ -178,7 +205,7 @@
                 ></a>
             </div>
 
-            <p class="welcome-text">W2</p>
+            <p class="welcome-text">Ola2</p>
 
             <div class="characters">
                 <div
@@ -255,9 +282,6 @@
             // CARDS 
             function changeImages(category) {
                 if (category === "projects") {
-
-
-
                     document.getElementById("project-card").querySelector("img").src = "/assets/images/projects_select.jpg";
                     document.getElementById("blog-card").querySelector("img").src = "/assets/images/blog_posterize_brown.jpg";
                     document.getElementById("music-card").querySelector("img").src = "/assets/images/music_posterize_brown.jpg";
@@ -305,7 +329,7 @@
 
             function resetBackground() {
                 if (permanentState) return;
-                document.body.style.backgroundImage = 'url("/assets/images/bg-color9.png")';
+                document.body.style.backgroundImage = 'url("/assets/images/bg-color9.1.png")';
                 document.body.style.backgroundColor = "";
             }
         </script>
