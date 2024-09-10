@@ -89,7 +89,7 @@
 
             .character img {
                 width: 100%;
-                height: 45vh;
+                height: 48vh;
                 object-fit: cover;
                 box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
                 border-radius: 10px;
@@ -97,7 +97,7 @@
 
             /* Cards Shapes */
 
-            #project-card:hover img {
+            #projects-card:hover img {
                 height: 60vh;
                 clip-path: polygon(75% -100%, 100% 75%, -25% 100%);
             }
@@ -119,7 +119,7 @@
 
             .character-text {
                 margin-top: 1vh;
-                font-size: 2.0vw;
+                font-size: 2.3vw;
                 font-weight: 325;
                 transition: color 0.3s ease;
             }
@@ -203,7 +203,7 @@
             <div class="characters">
                 <div
                     class="character"
-                    id="project-card"
+                    id="projects-card"
                     onclick="setPermanentState('projects')"
                     onmouseover="changeImagesAndBackground('projects')"
                     onmouseout="resetImages()"
@@ -309,7 +309,7 @@
 
             function resetImages() {
                 if (permanentState) return;
-                setImage("project-card", "/assets/images/projects2.jpg");
+                setImage("projects-card", "/assets/images/projects2.jpg");
                 setImage("blog-card", "/assets/images/blog2.jpg");
                 setImage("music-card", "/assets/images/music2.jpg");
                 setImage("games-card", "/assets/images/games3.jpg");
@@ -328,23 +328,23 @@
 
             function changeImages(category) {
                 if (category === "projects") {
-                    setImage("project-card", "/assets/images/projects_select.jpg");
+                    setImage("projects-card", "/assets/images/projects_select.jpg");
                     setImage("blog-card", "/assets/images/blog_posterize_brown.jpg");
                     setImage("music-card", "/assets/images/music_posterize_brown.jpg");
                     setImage("games-card", "/assets/images/games_brown.jpg");
                 } else if (category === "blog") {
                     setImage("blog-card", "/assets/images/blog_select.jpg");
-                    setImage("project-card", "/assets/images/projects_yellow.jpg");
+                    setImage("projects-card", "/assets/images/projects_yellow.jpg");
                     setImage("music-card", "/assets/images/music_yellow2.jpg");
                     setImage("games-card", "/assets/images/games_yellow.jpg");
                 } else if (category === "music") {
                     setImage("music-card", "/assets/images/music.jpg");
-                    setImage("project-card", "/assets/images/projects_blue.jpg");
+                    setImage("projects-card", "/assets/images/projects_blue.jpg");
                     setImage("blog-card", "/assets/images/blog_blue.jpg");
                     setImage("games-card", "/assets/images/games_blue.jpg");
                 } else if (category === "games") {
                     setImage("games-card", "/assets/images/games.png");
-                    setImage("project-card", "/assets/images/projects_red.jpg");
+                    setImage("projects-card", "/assets/images/projects_red.jpg");
                     setImage("blog-card", "/assets/images/blog_red.jpg");
                     setImage("music-card", "/assets/images/music_red.jpg");
                 }
@@ -373,56 +373,167 @@
             }
 
             function changeTextColors(category) {
-                // Seleciona os elementos de texto relevantes
-                const welcomeText = document.querySelector('.welcome-text');
-                const characterTexts = document.querySelectorAll('.character-text');
-                let highlightColor, otherColor;
+    // Seleciona os elementos de texto relevantes
+    const welcomeText = document.querySelector('.welcome-text');
+    const characterTexts = document.querySelectorAll('.character-text');
+    let highlightColor, otherColor, highlightFontSize, otherFontSize, highlightPosition, otherPosition;
+    let highlightRotate, otherRotate;
+    let highlightTranslateX, highlightTranslateY, otherTranslateX, otherTranslateY;
+    let highlightFontFamily, otherFontFamily;
+    let highlightFontWeight, otherFontWeight;
+    let highlightFontStyle, otherFontStyle;
 
-                // Define as cores para o card destacado e os outros cards
-                switch (category) {
-                    case 'projects':
-                        highlightColor = '#fff';
-                        otherColor = '#8B4513';
-                        break;
-                    case 'blog':
-                        highlightColor = '#ffd700';
-                        otherColor = '#4B0082';
-                        break;
-                    case 'music':
-                        highlightColor = '#4e9af1';
-                        otherColor = '#FF6347';
-                        break;
-                    case 'games':
-                        highlightColor = '#32cd32';
-                        otherColor = '#8A2BE2';
-                        break;
-                    default:
-                        highlightColor = '#fff';
-                        otherColor = '#fff';
-                }
+    // Define as cores, tamanhos de fonte, posições, rotação, deslocamento e fonte para o card destacado e os outros cards
+    switch (category) {
+        case 'projects':
+            highlightColor = '#ff470a';
+            otherColor = '#8B4513';
+            highlightFontSize = '4.5vw';  // Tamanho do texto do card selecionado
+            otherFontSize = '2.0vw';      // Tamanho do texto dos outros cards
+            highlightPosition = 'absolute'; // Posição destacada
+            otherPosition = 'relative';    // Posição padrão
+            highlightRotate = '340deg';     // Ângulo de rotação para o card destacado
+            otherRotate = '0deg';         // Ângulo de rotação para os outros cards
+            highlightTranslateX = '120px'; // Deslocamento horizontal para o card destacado
+            highlightTranslateY = '-180px'; // Deslocamento vertical para o card destacado
+            otherTranslateX = '0px';     // Deslocamento horizontal para os outros cards
+            otherTranslateY = '0px';     // Deslocamento vertical para os outros cards
+            highlightFontFamily = 'Bahnschrift Condensed'; // Família da fonte para o card destacado
+            otherFontFamily = 'Georgia, serif'; // Família da fonte para os outros cards
+            highlightFontWeight = 'bold'; // Peso da fonte para o card destacado
+            otherFontWeight = 'normal';   // Peso da fonte para os outros cards
+            highlightFontStyle = 'italic'; // Estilo da fonte para o card destacado
+            otherFontStyle = 'normal';    // Estilo da fonte para os outros cards
+            break;
+        case 'blog':
+            highlightColor = '#ffd700';
+            otherColor = '#4B0082';
+            highlightFontSize = '5.0vw';
+            otherFontSize = '2.0vw';
+            highlightPosition = 'static';
+            otherPosition = 'static';
+            highlightRotate = '0deg';
+            otherRotate = '0deg';
+            highlightTranslateX = '15px';
+            highlightTranslateY = '-35px';
+            otherTranslateX = '0px';
+            otherTranslateY = '0px';
+            highlightFontFamily = 'Gentium Basic';
+            otherFontFamily = 'Courier New, monospace';
+            highlightFontWeight = 'bold';
+            otherFontWeight = 'normal';
+            highlightFontStyle = 'italic';
+            otherFontStyle = 'normal';
+            break;
+        case 'music':
+            highlightColor = '#4e9af1';
+            otherColor = '#FF6347';
+            highlightFontSize = '4.0vw';
+            otherFontSize = '2.0vw';
+            highlightPosition = 'absolute';
+            otherPosition = 'relative';
+            highlightRotate = '0deg';
+            otherRotate = '0deg';
+            highlightTranslateX = '350px';
+            highlightTranslateY = '-60px';
+            otherTranslateX = '0px';
+            otherTranslateY = '0px';
+            highlightFontFamily = 'Corbel Light, sans-serif';
+            otherFontFamily = 'Courier New, monospace';
+            highlightFontWeight = 'normal';
+            otherFontWeight = 'normal';
+            highlightFontStyle = 'italic';
+            otherFontStyle = 'normal';
+            break;
+        case 'games':
+            highlightColor = '#32cd32';
+            otherColor = '#8A2BE2';
+            highlightFontSize = '6.0vw';
+            otherFontSize = '2.5vw';
+            highlightPosition = 'static';
+            otherPosition = 'static';
+            highlightRotate = '0deg';
+            otherRotate = '0deg';
+            highlightTranslateX = '0px';
+            highlightTranslateY = '-1000px';
+            otherTranslateX = '0px';
+            otherTranslateY = '0px';
+            highlightFontFamily = 'Impact, sans-serif';
+            otherFontFamily = 'Arial, sans-serif';
+            highlightFontWeight = 'bold';
+            otherFontWeight = 'normal';
+            highlightFontStyle = 'bold';
+            otherFontStyle = 'normal';
+            break;
+        default:
+            highlightColor = '#fff';
+            otherColor = '#fff';
+            highlightFontSize = '2.0vw';
+            otherFontSize = '2.0vw';
+            highlightPosition = 'static';
+            otherPosition = 'static';
+            highlightRotate = '0deg';
+            otherRotate = '0deg';
+            highlightTranslateX = '0px';
+            highlightTranslateY = '0px';
+            otherTranslateX = '0px';
+            otherTranslateY = '0px';
+            highlightFontFamily = 'sans-serif';
+            otherFontFamily = 'sans-serif';
+            highlightFontWeight = 'normal';
+            otherFontWeight = 'normal';
+            highlightFontStyle = 'normal';
+            otherFontStyle = 'normal';
+    }
 
-                // Aplica cor para o welcome e para os outros cards
-                welcomeText.style.color = otherColor;
-                characterTexts.forEach(text => {
-                    if (text.parentElement.id === `${category}-card`) {
-                        text.style.color = highlightColor;  // Seta a cor destacada para o card selecionado
-                    } else {
-                        text.style.color = otherColor;      // Seta a cor padrão para os outros cards e título
-                    }
-                });
-            }
+    // Aplica cor, tamanho de fonte, posição, rotação, deslocamento, e fonte para o welcome e para os outros cards
+    welcomeText.style.color = otherColor;
+    welcomeText.style.position = otherPosition; // Aplica a posição padrão
+    welcomeText.style.transform = `rotate(${otherRotate}) translate(${otherTranslateX}, ${otherTranslateY})`; // Aplica rotação e deslocamento
+    welcomeText.style.fontFamily = otherFontFamily; // Aplica a família da fonte padrão
+    welcomeText.style.fontWeight = otherFontWeight; // Aplica o peso da fonte padrão
+    welcomeText.style.fontStyle = otherFontStyle; // Aplica o estilo da fonte padrão
 
+    characterTexts.forEach(text => {
+        if (text.parentElement.id === `${category}-card`) {
+            text.style.color = highlightColor;  // Seta a cor destacada para o card selecionado
+            text.style.fontSize = highlightFontSize;  // Seta o tamanho da fonte destacada
+            text.style.position = highlightPosition;  // Aplica a posição destacada
+            text.style.transform = `rotate(${highlightRotate}) translate(${highlightTranslateX}, ${highlightTranslateY})`; // Aplica rotação e deslocamento
+            text.style.fontFamily = highlightFontFamily; // Aplica a família da fonte destacada
+            text.style.fontWeight = highlightFontWeight; // Aplica o peso da fonte destacado
+            text.style.fontStyle = highlightFontStyle; // Aplica o estilo da fonte destacado
+        } else {
+            text.style.color = otherColor;      // Seta a cor padrão para os outros cards e título
+            text.style.fontSize = otherFontSize;  // Seta o tamanho da fonte padrão
+            text.style.position = otherPosition;  // Aplica a posição padrão
+            text.style.transform = `rotate(${otherRotate}) translate(${otherTranslateX}, ${otherTranslateY})`; // Aplica rotação e deslocamento
+            text.style.fontFamily = otherFontFamily; // Aplica a família da fonte padrão
+            text.style.fontWeight = otherFontWeight; // Aplica o peso da fonte padrão
+            text.style.fontStyle = otherFontStyle; // Aplica o estilo da fonte padrão
+        }
+    });
+}
 
-            function resetTextColors() {
-                if (permanentState) return;
-                const welcomeText = document.querySelector('.welcome-text');
-                const characterTexts = document.querySelectorAll('.character-text');
+function resetTextColors() {
+    if (permanentState) return;
+    const welcomeText = document.querySelector('.welcome-text');
+    const characterTexts = document.querySelectorAll('.character-text');
 
-                welcomeText.style.color = '#fff';
-                characterTexts.forEach(text => {
-                    text.style.color = '#fff';
-                });
-            }
+    welcomeText.style.color = '#fff';
+    welcomeText.style.position = 'static'; // Reseta a posição para padrão
+    welcomeText.style.transform = 'rotate(0deg) translate(0px, 0px)'; // Reseta rotação e deslocamento
+    welcomeText.style.fontFamily = 'sans-serif'; // Reseta a família da fonte padrão
+    welcomeText.style.fontWeight = 'normal'; // Reseta o peso da fonte padrão
+    welcomeText.style.fontStyle = 'normal'; // Reseta o estilo da fonte padrão
+
+    characterTexts.forEach(text => {
+        text.style.color = '#fff';
+        text.style.fontSize = '2.3vw';  // Tamanho de fonte padrão
+        text.style.position = 'static'; // Reseta a posição para padrão
+        text.style.transform = 'rotate(0deg) translate(0px, 0px)'; //
+    });
+    }
         </script>
     </body>
 </html>
