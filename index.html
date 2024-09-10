@@ -100,7 +100,7 @@
 
                 height: 60vh;
                 clip-path: polygon(75% -100%, 100% 75%, -25% 100%); /* Triângulo apontando para baixo */
-                
+
             }
 
             #blog-card:hover img {
@@ -213,10 +213,10 @@
                     id="project-card"
                     onclick="setPermanentState('projects')"
                     onmouseover="changeImagesAndBackground('projects')"
-                    onmouseout="resetImages()"       
+                    onmouseout="resetImages()"
                     >
                     <a href="https://canopusart.neocities.org/Abyss-ImportantChar">
-                    <img src="/assets/images/projects2.jpg" alt="Projects" />
+                    <img src="/assets/images/projects2.jpg" alt="Projects" loading="lazy" />
                     </a>
                     <p class="character-text">Projects</p>
                 </div>
@@ -226,9 +226,9 @@
                     onclick="setPermanentState('blog')"
                     onmouseover="changeImagesAndBackground('blog')"
                     onmouseout="resetImages()"
-                >   
+                >
                      <a href="https://canopusart.neocities.org/Blog">
-                    <img src="/assets/images/blog2.jpg" alt="Blog" />
+                    <img src="/assets/images/blog2.jpg" alt="Blog" loading="lazy" />
                     </a>
                     <p class="character-text">Blog</p>
                 </div>
@@ -240,7 +240,7 @@
                     onmouseout="resetImages()"
                 >
                     <a href="https://canopusart.neocities.org/Music">
-                    <img src="/assets/images/music2.jpg" alt="Music" />
+                    <img src="/assets/images/music2.jpg" alt="Music" loading="lazy" />
                     </a>
                     <p class="character-text">Music</p>
                 </div>
@@ -251,7 +251,7 @@
                     onmouseover="changeImagesAndBackground('games')"
                     onmouseout="resetImages()"
                 >   <a href="https://canopusart.neocities.org/Games">
-                    <img src="/assets/images/games3.jpg" alt="Games" />
+                    <img src="/assets/images/games3.jpg" alt="Games" loading="lazy" />
                     </a>
                     <p class="character-text">Games</p>
                     </a>
@@ -265,6 +265,40 @@
 
         <script>
             let permanentState = null;
+            let imageCache = {};
+
+            function preloadImages() {
+                const imagePaths = [
+                    "/assets/images/projects2.jpg",
+                    "/assets/images/blog2.jpg",
+                    "/assets/images/music2.jpg",
+                    "/assets/images/games3.jpg",
+                    "/assets/images/projects_select.jpg",
+                    "/assets/images/blog_posterize_brown.jpg",
+                    "/assets/images/music_posterize_brown.jpg",
+                    "/assets/images/games_brown.jpg",
+                    "/assets/images/blog_select.jpg",
+                    "/assets/images/projects_yellow.jpg",
+                    "/assets/images/music_yellow2.jpg",
+                    "/assets/images/games_yellow.jpg",
+                    "/assets/images/music.jpg",
+                    "/assets/images/projects_blue.jpg",
+                    "/assets/images/blog_blue.jpg",
+                    "/assets/images/games_blue.jpg",
+                    "/assets/images/games.png",
+                    "/assets/images/projects_red.jpg",
+                    "/assets/images/blog_red.jpg",
+                    "/assets/images/music_red.jpg"
+                ];
+
+                imagePaths.forEach(path => {
+                    const img = new Image();
+                    img.src = path;
+                    imageCache[path] = img;
+                });
+            }
+
+            window.addEventListener('load', preloadImages);
 
             function changeImagesAndBackground(category) {
                 if (permanentState) return;
@@ -280,42 +314,44 @@
 
             function resetImages() {
                 if (permanentState) return;
-                document.getElementById("project-card").querySelector("img").src = "/assets/images/projects2.jpg";
-                document.getElementById("blog-card").querySelector("img").src = "/assets/images/blog2.jpg";
-                document.getElementById("music-card").querySelector("img").src = "/assets/images/music2.jpg";
-                document.getElementById("games-card").querySelector("img").src = "/assets/images/games3.jpg";
+                setImage("project-card", "/assets/images/projects2.jpg");
+                setImage("blog-card", "/assets/images/blog2.jpg");
+                setImage("music-card", "/assets/images/music2.jpg");
+                setImage("games-card", "/assets/images/games3.jpg");
                 resetBackground();
             }
-            
-            // CARDS 
+
+            function setImage(cardId, imagePath) {
+                const img = document.getElementById(cardId).querySelector("img");
+                if (imageCache[imagePath]) {
+                    img.src = imageCache[imagePath].src;
+                } else {
+                    img.src = imagePath;
+                }
+            }
+
+            // CARDS
             function changeImages(category) {
                 if (category === "projects") {
-                    document.getElementById("project-card").querySelector("img").src = "/assets/images/projects_select.jpg";
-                    document.getElementById("blog-card").querySelector("img").src = "/assets/images/blog_posterize_brown.jpg";
-                    document.getElementById("music-card").querySelector("img").src = "/assets/images/music_posterize_brown.jpg";
-                    document.getElementById("games-card").querySelector("img").src = "/assets/images/games_brown.jpg";
+                    setImage("project-card", "/assets/images/projects_select.jpg");
+                    setImage("blog-card", "/assets/images/blog_posterize_brown.jpg");
+                    setImage("music-card", "/assets/images/music_posterize_brown.jpg");
+                    setImage("games-card", "/assets/images/games_brown.jpg");
                 } else if (category === "blog") {
-
-                
-
-                    document.getElementById("blog-card").querySelector("img").src = "/assets/images/blog_select.jpg";
-                    document.getElementById("project-card").querySelector("img").src = "/assets/images/projects_yellow.jpg";
-                    document.getElementById("music-card").querySelector("img").src = "/assets/images/music_yellow2.jpg";
-                    document.getElementById("games-card").querySelector("img").src = "/assets/images/games_yellow.jpg";
+                    setImage("blog-card", "/assets/images/blog_select.jpg");
+                    setImage("project-card", "/assets/images/projects_yellow.jpg");
+                    setImage("music-card", "/assets/images/music_yellow2.jpg");
+                    setImage("games-card", "/assets/images/games_yellow.jpg");
                 } else if (category === "music") {
-                
-                    document.getElementById("music-card").querySelector("img").src = "/assets/images/music.jpg";
-
-                    document.getElementById("project-card").querySelector("img").src = "/assets/images/projects_blue.jpg";
-                    document.getElementById("blog-card").querySelector("img").src = "/assets/images/blog_blue.jpg";
-                    document.getElementById("games-card").querySelector("img").src = "/assets/images/games_blue.jpg";
+                    setImage("music-card", "/assets/images/music.jpg");
+                    setImage("project-card", "/assets/images/projects_blue.jpg");
+                    setImage("blog-card", "/assets/images/blog_blue.jpg");
+                    setImage("games-card", "/assets/images/games_blue.jpg");
                 } else if (category === "games") {
-   
-                    document.getElementById("games-card").querySelector("img").src = "/assets/images/games.png";
-                   
-                    document.getElementById("project-card").querySelector("img").src = "/assets/images/projects_red.jpg";
-                    document.getElementById("blog-card").querySelector("img").src = "/assets/images/blog_red.jpg";
-                    document.getElementById("music-card").querySelector("img").src = "/assets/images/music_red.jpg";
+                    setImage("games-card", "/assets/images/games.png");
+                    setImage("project-card", "/assets/images/projects_red.jpg");
+                    setImage("blog-card", "/assets/images/blog_red.jpg");
+                    setImage("music-card", "/assets/images/music_red.jpg");
                 }
             }
 
