@@ -66,6 +66,7 @@
                 margin-bottom: 4vh;
                 text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
                 text-align: center;
+                transition: color 0.3s ease;
             }
 
             .characters {
@@ -97,38 +98,30 @@
             /* Cards Shapes */
 
             #project-card:hover img {
-
                 height: 60vh;
-                clip-path: polygon(75% -100%, 100% 75%, -25% 100%); /* Triângulo apontando para baixo */
-
+                clip-path: polygon(75% -100%, 100% 75%, -25% 100%);
             }
 
             #blog-card:hover img {
                 height: 60vh;
                 clip-path: ellipse(50% 100% at 50% 50%);
-
             }
 
             #music-card:hover img {
                 height: 60vh;
                 clip-path: polygon(25% 0%, 100% 0%, 75% 100%, 0% 100%);
-
             }
 
             #games-card:hover img {
                 height: 60vh;
                 clip-path: polygon(20% 0%, 0% 20%, 30% 50%, 0% 80%, 20% 100%, 50% 70%, 80% 100%, 100% 80%, 70% 50%, 100% 20%, 80% 0%, 50% 30%);
-
             }
-
-            /* ---- MUDANÇA DA FONTE  */
-
-            /* ---   */
 
             .character-text {
                 margin-top: 1vh;
                 font-size: 2.0vw;
                 font-weight: 325;
+                transition: color 0.3s ease;
             }
 
             .footer {
@@ -304,12 +297,14 @@
                 if (permanentState) return;
                 changeImages(category);
                 changeBackground(category);
+                changeTextColors(category);
             }
 
             function setPermanentState(category) {
                 permanentState = category;
                 changeImages(category);
                 changeBackground(category);
+                changeTextColors(category);
             }
 
             function resetImages() {
@@ -319,6 +314,7 @@
                 setImage("music-card", "/assets/images/music2.jpg");
                 setImage("games-card", "/assets/images/games3.jpg");
                 resetBackground();
+                resetTextColors();
             }
 
             function setImage(cardId, imagePath) {
@@ -330,7 +326,6 @@
                 }
             }
 
-            // CARDS
             function changeImages(category) {
                 if (category === "projects") {
                     setImage("project-card", "/assets/images/projects_select.jpg");
@@ -375,6 +370,58 @@
                 if (permanentState) return;
                 document.body.style.backgroundImage = 'url("/assets/images/bg-color9.1.png")';
                 document.body.style.backgroundColor = "";
+            }
+
+            function changeTextColors(category) {
+                // Seleciona os elementos de texto relevantes
+                const welcomeText = document.querySelector('.welcome-text');
+                const characterTexts = document.querySelectorAll('.character-text');
+                let highlightColor, otherColor;
+
+                // Define as cores para o card destacado e os outros cards
+                switch (category) {
+                    case 'projects':
+                        highlightColor = '#fff';
+                        otherColor = '#8B4513';
+                        break;
+                    case 'blog':
+                        highlightColor = '#ffd700';
+                        otherColor = '#4B0082';
+                        break;
+                    case 'music':
+                        highlightColor = '#4e9af1';
+                        otherColor = '#FF6347';
+                        break;
+                    case 'games':
+                        highlightColor = '#32cd32';
+                        otherColor = '#8A2BE2';
+                        break;
+                    default:
+                        highlightColor = '#fff';
+                        otherColor = '#fff';
+                }
+
+                // Aplica cor para o welcome e para os outros cards
+                welcomeText.style.color = otherColor;
+                characterTexts.forEach(text => {
+                    if (text.parentElement.id === `${category}-card`) {
+                        text.style.color = highlightColor;  // Seta a cor destacada para o card selecionado
+                    } else {
+                        text.style.color = otherColor;      // Seta a cor padrão para os outros cards e título
+                    }
+                });
+            }
+
+
+            function resetTextColors() {
+                if (permanentState) return;
+                const welcomeText = document.querySelector('.welcome-text');
+                const characterTexts = document.querySelectorAll('.character-text');
+
+                welcomeText.style.color = '#fff';
+                characterTexts.forEach(text => {
+                    text.style.color = '#fff';
+                });
             }
         </script>
     </body>
