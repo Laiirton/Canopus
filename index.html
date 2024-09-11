@@ -51,29 +51,29 @@
                 position: absolute;
                 top: 50%; /* Ajuste a posição vertical conforme necessário */
                 left: 50%; /* Ajuste a posição horizontal conforme necessário */
-                transform: translate( -200%, -180%); /* Centraliza o GIF */}
+                transform: translate( -180%, -200%); /* Centraliza o GIF */}
 
              /* Estilo para o GIF */
             .loading-gif {
-                width: 400px; /* Ajuste o tamanho do GIF conforme necessário */
-                height: 400px; /* Ajuste o tamanho do GIF conforme necessário */
+                width: 125px; /* Ajuste o tamanho do GIF conforme necessário */
+                height: 125px; /* Ajuste o tamanho do GIF conforme necessário */
             }
 
 
             #loading-text {
-                font-size: 15.5rem;
+                font-size: 3.5rem;
                 color: #f00e33;
-                margin-bottom: 100px;
-                margin-top: 120px; /* Ajuste a margem superior para espaçar do GIF */
+                margin-bottom: 35px;
+                margin-top: -60px; /* Ajuste a margem superior para espaçar do GIF */
                 z-index: 1; /* Garante que o texto fique acima do GIF */
                 transition: all 0.5s ease; /* Suaviza a transição entre os estilos */
 
             }
 
             #loading-percentage {
-            font-size: 5.2rem;
+            font-size: 2.5rem;
             color: #f00e33;
-            margin-bottom: 150px; /* Espaçamento entre o texto e os blocos */
+            margin-bottom: 100px; /* Espaçamento entre o texto e os blocos */
             z-index: 1; /* Garante que o texto fique acima do GIF */
            
         }
@@ -82,12 +82,12 @@
                 display: flex;
                 justify-content: space-between;
                 width: 500px;
-                margin-top: 20px;
+                margin-top: -40px;
             }
 
             .block {
-                width: 200px;
-                height: 100px;
+                width: 50px;
+                height: 25px;
                 background-color: #fcc319;
                 border: 2px solid #000;
                 animation: wave 1s infinite;
@@ -522,7 +522,7 @@
             highlightRotate = '340deg';     // Ângulo de rotação para o card destacado
             otherRotate = '0deg';         // Ângulo de rotação para os outros cards
             highlightTranslateX = '120px'; // Deslocamento horizontal para o card destacado
-            highlightTranslateY = '-180px'; // Deslocamento vertical para o card destacado
+            highlightTranslateY = '-30px'; // Deslocamento vertical para o card destacado
             otherTranslateX = '0px';     // Deslocamento horizontal para os outros cards
             otherTranslateY = '0px';     // Deslocamento vertical para os outros cards
             highlightFontFamily = 'Bahnschrift Condensed'; // Família da fonte para o card destacado
@@ -542,8 +542,8 @@
             otherPosition = 'static';
             highlightRotate = '0deg';
             otherRotate = '0deg';
-            highlightTranslateX = '15px';
-            highlightTranslateY = '-35px';
+            highlightTranslateX = ' -5px';
+            highlightTranslateY = ' -10px';
             otherTranslateX = '0px';
             otherTranslateY = '0px';
             highlightFontFamily = 'Gentium Basic';
@@ -562,8 +562,8 @@
             otherPosition = 'relative';
             highlightRotate = '0deg';
             otherRotate = '0deg';
-            highlightTranslateX = '350px';
-            highlightTranslateY = '-60px';
+            highlightTranslateX = '100px';
+            highlightTranslateY = ' -20px';
             otherTranslateX = '0px';
             otherTranslateY = '0px';
             highlightFontFamily = 'Corbel Light, sans-serif';
@@ -583,7 +583,7 @@
             highlightRotate = '0deg';
             otherRotate = '0deg';
             highlightTranslateX = '0px';
-            highlightTranslateY = '-1000px';
+            highlightTranslateY = '-250px';
             otherTranslateX = '0px';
             otherTranslateY = '0px';
             highlightFontFamily = 'Impact, sans-serif';
@@ -675,10 +675,10 @@ function resetTextColors() {
                 const loadingPercentage = document.getElementById('loading-percentage');
                 const loadingScreen = document.getElementById('loading-screen');
                 const messages = [
-                { text: "Loading...", fontSize: "15.5rem", color: "#f00e33", backgroundColor: "#000000" },
-                { text: "Aesthetics", fontSize: "25rem", color: "#f9c74f", backgroundColor: "#f2998f" },
-                { text: "Inspiration.", fontSize: "15rem", color: "#00f5e9", backgroundColor: "#4a4a4a" },
-                { text: "Creativity input..", fontSize: "13.0rem", color: "#ff00a2", backgroundColor: "#9000ff"}
+                { text: "Loading...", fontSize: "4.0rem", color: "#f00e33", backgroundColor: "#000000" },
+                { text: "Aesthetics", fontSize: "6rem", color: "#f9c74f", backgroundColor: "#f2998f" },
+                { text: "Inspiration.", fontSize: "8rem", color: "#00f5e9", backgroundColor: "#4a4a4a" },
+                { text: "Creativity input..", fontSize: "10.0rem", color: "#ff00a2", backgroundColor: "#9000ff"}
             ];
 
             const updateLoading = () => {
