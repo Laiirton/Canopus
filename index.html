@@ -51,7 +51,7 @@
                 position: absolute;
                 top: 50%; /* Ajuste a posição vertical conforme necessário */
                 left: 50%; /* Ajuste a posição horizontal conforme necessário */
-                transform: translate( -180%, -200%); /* Centraliza o GIF */}
+                transform: translate( -180%, -175%); /* Centraliza o GIF */}
 
              /* Estilo para o GIF */
             .loading-gif {
@@ -64,7 +64,7 @@
                 font-size: 3.5rem;
                 color: #f00e33;
                 margin-bottom: 35px;
-                margin-top: -60px; /* Ajuste a margem superior para espaçar do GIF */
+                margin-top: 75px; /* Ajuste a margem superior para espaçar do GIF */
                 z-index: 1; /* Garante que o texto fique acima do GIF */
                 transition: all 0.5s ease; /* Suaviza a transição entre os estilos */
 
@@ -73,7 +73,7 @@
             #loading-percentage {
             font-size: 2.5rem;
             color: #f00e33;
-            margin-bottom: 100px; /* Espaçamento entre o texto e os blocos */
+            margin-bottom: 90px; /* Espaçamento entre o texto e os blocos */
             z-index: 1; /* Garante que o texto fique acima do GIF */
 
         }
@@ -86,9 +86,9 @@
             .minecraft-loader {
                 display: flex;
                 justify-content: space-between;
-                width: 500px;
+                width: var(--loader-width); /* Largura ajustável baseada na porcentagem */
                 margin-top: -40px;
-                gap:  5px; /* Ajuste o valor conforme necessário */
+                gap:  15px; /* Ajuste o valor conforme necessário */
 
             }
 
@@ -113,18 +113,18 @@
             }
 
             .block:nth-child(3) {
-                animation-delay: 0.4s;
-                background-color: #f18883; /* Cor para o terceiro bloco */
+                animation-delay: 1.0s;
+                background-color: #f18883; /* Cor para o terceiro bloco */ 
 
             }
             .block:nth-child(4) {
-                animation-delay: 0.8s;
-                background-color: #ac0f36; /* Cor para o quarto bloco */
+                animation-delay: 2.0s;
+                background-color: #fedd24; /* Cor para o quarto bloco */
             }
 
             .block:nth-child(5) {
-                animation-delay: 0.8s;
-                background-color: #ff0077; /* Cor para o quarto bloco */
+                animation-delay: 3.0s;
+                background-color: #0225b1; /* Cor para o quarto bloco */
             }
 
             /* Animação de onda */
@@ -686,17 +686,31 @@ function resetTextColors() {
     if (percentage <= 25) {
         newSize = 50; // Tamanho para 0-25%
     } else if (percentage <= 50) {
-        newSize = 75; // Tamanho para 26-50%
+        newSize = 40; // Tamanho para 26-50%
     } else if (percentage <= 75) {
-        newSize = 100; // Tamanho para 51-75%
+        newSize = 30; // Tamanho para 51-75%
     } else {
-        newSize = 125; // Tamanho para 76-100%
+        newSize = 25; // Tamanho para 76-100%
     }
     const newColor = `rgb(${255 - percentage * 2.55}, ${percentage * 2.55}, 0)`; // Gradiente de verde para vermelho
+
+  // Define a largura com base na faixa de porcentagem
+  let newWidth;
+    if (percentage <= 25) {
+        newWidth = 100; // Largura para 0-25%
+    } else if (percentage <= 50) {
+        newWidth = 105; // Largura para 26-50%
+    } else if (percentage <= 75) {
+        newWidth = 115; // Largura para 51-75%
+    } else {
+        newWidth = 125; // Largura para 76-100%
+    }
 
     // Atualiza as variáveis CSS
     document.documentElement.style.setProperty('--block-size', `${newSize}px`);
     document.documentElement.style.setProperty('--block-color', newColor);
+    document.documentElement.style.setProperty('--loader-width', `${newWidth}px`);
+
 }
 
 // Exemplo de uso: atualiza o estilo dos blocos com base em 75%
@@ -715,10 +729,11 @@ updateBlockStyles(0);
                 const loadingPercentage = document.getElementById('loading-percentage');
                 const loadingScreen = document.getElementById('loading-screen');
                 const messages = [
-                { text: "Carregando..", fontSize: "3.7rem", color: "#f00e33", backgroundColor: "#000000" },
-                { text: "Aesthetics", fontSize: "6rem", color: "#f9c74f", backgroundColor: "#f2998f" },
-                { text: "Inspiration.", fontSize: "8rem", color: "#00f5e9", backgroundColor: "#4a4a4a" },
-                { text: "Creativity input..", fontSize: "10.0rem", color: "#ff00a2", backgroundColor: "#9000ff"}
+                { text: " Carregando..", fontSize: "3.7rem", color: "#f00e33", backgroundColor: "#000000" },
+                { text: "✨Aesthetics", fontSize: "7.5rem", color: "#f9c74f", backgroundColor: "#f2998f" },
+                { text: "🎨Dreams.", fontSize: "6.5rem", color: "#00f5e9", backgroundColor: "#66b0ff" },
+                { text: "💡Inspiration.", fontSize: "4.0rem", color: "#4aff7d", backgroundColor: "#e8b409 " },
+                { text: "🧠Creativity input!", fontSize: "4.5rem", color: "#ff00a2", backgroundColor: "#9000ff"}
             ];
 
             const updateLoading = () => {
@@ -728,8 +743,8 @@ updateBlockStyles(0);
                     loadingPercentage.textContent = `${percentage}%`;
 
                       // Atualiza o texto de carregamento com base na porcentagem
-                      if (percentage % 20 === 0) { // Muda a cada 25%
-                        const messageIndex = percentage / 20- 1;
+                      if (percentage % 18 === 0) { // Muda a cada 20%
+                        const messageIndex = percentage / 18- 1;
                         const message = messages[messageIndex];
 
                         loadingText.textContent = message.text;
@@ -739,6 +754,9 @@ updateBlockStyles(0);
                         loadingScreen.style.backgroundColor = message.backgroundColor;
 
                     }
+
+                     // Atualiza o estilo dos blocos com base na porcentagem
+                    updateBlockStyles(percentage);
 
                     // Simula uma atualização do carregamento
                     setTimeout(updateLoading, 30); // Ajuste o intervalo conforme necessário
