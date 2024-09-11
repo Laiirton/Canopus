@@ -46,21 +46,43 @@
                 z-index: 1000;
             }
 
+            /* Contêiner para o GIF */
+            .gif-container {
+                position: absolute;
+                top: 50%; /* Ajuste a posição vertical conforme necessário */
+                left: 50%; /* Ajuste a posição horizontal conforme necessário */
+                transform: translate( -200%, -180%); /* Centraliza o GIF */}
+
+             /* Estilo para o GIF */
+            .loading-gif {
+                width: 400px; /* Ajuste o tamanho do GIF conforme necessário */
+                height: 400px; /* Ajuste o tamanho do GIF conforme necessário */
+            }
+
+
             #loading-text {
                 font-size: 15.5rem;
                 color: #f00e33;
                 margin-bottom: 100px;
+                margin-top: 120px; /* Ajuste a margem superior para espaçar do GIF */
+                z-index: 1; /* Garante que o texto fique acima do GIF */
+                transition: all 0.5s ease; /* Suaviza a transição entre os estilos */
+
             }
 
             #loading-percentage {
             font-size: 5.2rem;
             color: #f00e33;
             margin-bottom: 150px; /* Espaçamento entre o texto e os blocos */
+            z-index: 1; /* Garante que o texto fique acima do GIF */
            
         }
+
             .minecraft-loader {
                 display: flex;
-                gap: 10px;
+                justify-content: space-between;
+                width: 500px;
+                margin-top: 20px;
             }
 
             .block {
@@ -68,7 +90,7 @@
                 height: 100px;
                 background-color: #fcc319;
                 border: 2px solid #000;
-                animation: bounce 1s infinite;
+                animation: wave 1s infinite;
                 transform: rotateX(90deg) rotateY(240deg);
             }
 
@@ -90,8 +112,17 @@
             .block:nth-child(4) {
                 background-color: #ac0f36; /* Cor para o quarto bloco */
             }
-            
 
+            /* Animação de onda */
+            @keyframes wave {
+                0%, 100% {
+                    transform: scaleY(1);
+                }
+                50% {
+                    transform: scaleY(1.5);
+                }
+            }
+            
             @keyframes bounce {
                 0%, 20%, 50%, 80%, 100% {
                     transform: translateY(0);
@@ -247,6 +278,13 @@
 
            <!-- Tela de carregamento -->
            <div id="loading-screen">
+
+                <!--GIF ao lado -->
+            <div class="gif-container">
+                <img src="/assets/images/Cube-anim2.gif" alt="Loading" class="loading-gif">
+            </div>
+                 <!--GIF ao lado -->
+
             <div id="loading-text">Loading...</div>
             <div id="loading-percentage">0%</div>
 
@@ -258,6 +296,7 @@
             </div>
         </div>
 
+    
         <div class="container">
             <div class="social-icons">
                 <a
@@ -492,6 +531,7 @@
             otherFontWeight = 'normal';   // Peso da fonte para os outros cards
             highlightFontStyle = 'italic'; // Estilo da fonte para o card destacado
             otherFontStyle = 'normal';    // Estilo da fonte para os outros cards
+            
             break;
         case 'blog':
             highlightColor = '#ffd700';
@@ -627,17 +667,18 @@ function resetTextColors() {
                 setTimeout(() => {
                     document.getElementById('loading-screen').style.display = 'none';
                     document.querySelector('.container').style.display = 'flex';
-                }, 3000); // Ajuste o tempo conforme necessário
+                }, 3500); // Ajuste o tempo conforme necessário
             });
             
             let percentage = 0;
                 const loadingText = document.getElementById('loading-text');
                 const loadingPercentage = document.getElementById('loading-percentage');
+                const loadingScreen = document.getElementById('loading-screen');
                 const messages = [
-                "Loading...",
-                "Aesthetics",
-                "Inspiration.",
-                "Creativity input.."
+                { text: "Loading...", fontSize: "15.5rem", color: "#f00e33", backgroundColor: "#000000" },
+                { text: "Aesthetics", fontSize: "25rem", color: "#f9c74f", backgroundColor: "#f2998f" },
+                { text: "Inspiration.", fontSize: "15rem", color: "#00f5e9", backgroundColor: "#4a4a4a" },
+                { text: "Creativity input..", fontSize: "13.0rem", color: "#ff00a2", backgroundColor: "#9000ff"}
             ];
 
             const updateLoading = () => {
@@ -647,9 +688,16 @@ function resetTextColors() {
                     loadingPercentage.textContent = `${percentage}%`;
 
                       // Atualiza o texto de carregamento com base na porcentagem
-                      if (percentage % 25 === 0) { // Muda a cada 25%
-                        const messageIndex = percentage / 25;
-                        loadingText.textContent = messages[messageIndex];
+                      if (percentage % 20 === 0) { // Muda a cada 25%
+                        const messageIndex = percentage / 20- 1;
+                        const message = messages[messageIndex];
+
+                        loadingText.textContent = message.text;
+                        loadingText.style.fontSize = message.fontSize;
+                        loadingText.style.color = message.color;
+                        loadingPercentage.style.color = message.color; // Atualiza a cor do texto da porcentagem
+                        loadingScreen.style.backgroundColor = message.backgroundColor;
+
                     }
 
                     // Simula uma atualização do carregamento
