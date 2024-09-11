@@ -83,15 +83,18 @@
                 justify-content: space-between;
                 width: 500px;
                 margin-top: -40px;
+                gap:  5px; /* Ajuste o valor conforme necessário */
+
             }
 
             .block {
-                width: 50px;
-                height: 25px;
+                width: 70px;
+                height: 16px;
                 background-color: #fcc319;
                 border: 2px solid #000;
-                animation: wave 1s infinite;
+                animation: wave 1.0s infinite;
                 transform: rotateX(90deg) rotateY(240deg);
+
             }
 
             .block:nth-child(1) {
@@ -110,7 +113,13 @@
 
             }
             .block:nth-child(4) {
+                animation-delay: 0.8s;
                 background-color: #ac0f36; /* Cor para o quarto bloco */
+            }
+
+            .block:nth-child(5) {
+                animation-delay: 0.8s;
+                background-color: #ff0077; /* Cor para o quarto bloco */
             }
 
             /* Animação de onda */
@@ -289,6 +298,7 @@
             <div id="loading-percentage">0%</div>
 
             <div class="minecraft-loader">
+                <div class="block"></div>
                 <div class="block"></div>
                 <div class="block"></div>
                 <div class="block"></div>
