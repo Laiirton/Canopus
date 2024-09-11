@@ -78,6 +78,11 @@
 
         }
 
+          :root {
+        --block-size: 50px;
+        --block-color: #fcc319;
+         }
+
             .minecraft-loader {
                 display: flex;
                 justify-content: space-between;
@@ -88,8 +93,8 @@
             }
 
             .block {
-                width: 70px;
-                height: 16px;
+                width: var(--block-size);
+                height: var(--block-size);
                 background-color: #fcc319;
                 border: 2px solid #000;
                 animation: wave 1.0s infinite;
@@ -673,6 +678,31 @@ function resetTextColors() {
     });
     }
 
+    // Mudando os blocos //
+    function updateBlockStyles(percentage) {
+    // Limita a porcentagem entre 0 e 100
+    percentage = Math.min(100, Math.max(0, percentage));
+    let newSize;
+    if (percentage <= 25) {
+        newSize = 50; // Tamanho para 0-25%
+    } else if (percentage <= 50) {
+        newSize = 75; // Tamanho para 26-50%
+    } else if (percentage <= 75) {
+        newSize = 100; // Tamanho para 51-75%
+    } else {
+        newSize = 125; // Tamanho para 76-100%
+    }
+    const newColor = `rgb(${255 - percentage * 2.55}, ${percentage * 2.55}, 0)`; // Gradiente de verde para vermelho
+
+    // Atualiza as variáveis CSS
+    document.documentElement.style.setProperty('--block-size', `${newSize}px`);
+    document.documentElement.style.setProperty('--block-color', newColor);
+}
+
+// Exemplo de uso: atualiza o estilo dos blocos com base em 75%
+// Pode ser substituído por um valor dinâmico ou evento
+updateBlockStyles(0);
+
     document.addEventListener('DOMContentLoaded', () => {
                 setTimeout(() => {
                     document.getElementById('loading-screen').style.display = 'none';
@@ -685,7 +715,7 @@ function resetTextColors() {
                 const loadingPercentage = document.getElementById('loading-percentage');
                 const loadingScreen = document.getElementById('loading-screen');
                 const messages = [
-                { text: "Loading...", fontSize: "4.0rem", color: "#f00e33", backgroundColor: "#000000" },
+                { text: "Carregando..", fontSize: "3.7rem", color: "#f00e33", backgroundColor: "#000000" },
                 { text: "Aesthetics", fontSize: "6rem", color: "#f9c74f", backgroundColor: "#f2998f" },
                 { text: "Inspiration.", fontSize: "8rem", color: "#00f5e9", backgroundColor: "#4a4a4a" },
                 { text: "Creativity input..", fontSize: "10.0rem", color: "#ff00a2", backgroundColor: "#9000ff"}
