@@ -366,3 +366,44 @@ const updateLoading = () => {
 };
 
 updateLoading();
+
+function showCategoryModal(event) {
+    const modal = document.getElementById('category-modal');
+    const overlay = document.querySelector('.overlay');
+    const closeButton = document.querySelector('.close-button');
+
+    // Pega a posição do card clicado
+    const card = event.currentTarget;
+    const rect = card.getBoundingClientRect();
+
+    // Posiciona o modal na frente do card clicado
+    modal.style.top = `${rect.top + window.scrollY}px`;
+    modal.style.left = `${rect.left + window.scrollX}px`;
+
+    modal.style.display = 'flex';
+    overlay.style.display = 'block';
+
+    closeButton.onclick = function() {
+        modal.style.display = 'none';
+        overlay.style.display = 'none';
+    };
+
+    overlay.onclick = function() {
+        modal.style.display = 'none';
+        overlay.style.display = 'none';
+    };
+
+    const categoryItems = document.querySelectorAll('.category-item');
+    categoryItems.forEach(item => {
+        item.onclick = function() {
+            const categoryName = item.textContent;
+            console.log(`Clicou na categoria: ${categoryName}`);
+            modal.style.display = 'none';
+            overlay.style.display = 'none';
+        };
+    });
+}
+
+document.querySelectorAll('.character').forEach(card => {
+    card.addEventListener('click', showCategoryModal);
+});

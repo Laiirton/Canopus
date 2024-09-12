@@ -11,6 +11,9 @@
 </head>
 
 <body>
+    <!-- Adicione esta linha logo após a abertura da tag body -->
+    <div class="overlay"></div>
+
     <!-- Tela de carregamento -->
     <div id="loading-screen">
         <!--GIF ao lado -->
@@ -31,6 +34,17 @@
         </div>
     </div>
 
+    <div id="category-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h2>Selecione uma Categoria</h2>
+            <div class="category-list">
+                <div class="category-item">Categoria 1</div>
+                <div class="category-item">Categoria 2</div>
+                <div class="category-item">Categoria 3</div>
+            </div>
+        </div>
+    </div>
 
     <div class="container">
         <div class="social-icons">
@@ -46,33 +60,45 @@
         <p class="welcome-text">Welcome to my creative space</p>
 
         <div class="characters">
-            <div class="character" id="projects-card" onclick="setPermanentState('projects')"
+            <div class="character" id="projects-card" 
                 onmouseover="changeImagesAndBackground('projects')" onmouseout="resetImages()">
-                <a href="https://canopusart.neocities.org/Abyss-ImportantChar">
-                    <img src="/assets/images/projects2.jpg" alt="Projects" loading="lazy" />
-                </a>
+                <img src="/assets/images/projects2.jpg" alt="Projects" loading="lazy" />
                 <p class="character-text">Projects</p>
+                <div class="category-selector">
+                    <div class="category-item">Category 1</div>
+                    <div class="category-item">Category 2</div>
+                    <div class="category-item">Category 3</div>
+                </div>
             </div>
-            <div class="character" id="blog-card" onclick="setPermanentState('blog')"
+            <div class="character" id="blog-card" 
                 onmouseover="changeImagesAndBackground('blog')" onmouseout="resetImages()">
-                <a href="https://canopusart.neocities.org/Blog">
-                    <img src="/assets/images/blog2.jpg" alt="Blog" loading="lazy" />
-                </a>
+                <img src="/assets/images/blog2.jpg" alt="Blog" loading="lazy" />
                 <p class="character-text">Blog</p>
+                <div class="category-selector">
+                    <div class="category-item">Category 1</div>
+                    <div class="category-item">Category 2</div>
+                    <div class="category-item">Category 3</div>
+                </div>
             </div>
-            <div class="character" id="music-card" onclick="setPermanentState('music')"
+            <div class="character" id="music-card" 
                 onmouseover="changeImagesAndBackground('music')" onmouseout="resetImages()">
-                <a href="https://canopusart.neocities.org/Music">
-                    <img src="/assets/images/music2.jpg" alt="Music" loading="lazy" />
-                </a>
+                <img src="/assets/images/music2.jpg" alt="Music" loading="lazy" />
                 <p class="character-text">Music</p>
+                <div class="category-selector">
+                    <div class="category-item">Category 1</div>
+                    <div class="category-item">Category 2</div>
+                    <div class="category-item">Category 3</div>
+                </div>
             </div>
-            <div class="character" id="games-card" onclick="setPermanentState('games')"
+            <div class="character" id="games-card" 
                 onmouseover="changeImagesAndBackground('games')" onmouseout="resetImages()">
-                <a href="https://canopusart.neocities.org/Games">
-                    <img src="/assets/images/games3.jpg" alt="Games" loading="lazy" />
-                </a>
+                <img src="/assets/images/games3.jpg" alt="Games" loading="lazy" />
                 <p class="character-text">Games</p>
+                <div class="category-selector">
+                    <div class="category-item">Category 1</div>
+                    <div class="category-item">Category 2</div>
+                    <div class="category-item">Category 3</div>
+                </div>
             </div>
         </div>
     </div>
