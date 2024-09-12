@@ -372,9 +372,23 @@ function showCategoryModal(event) {
     const overlay = document.querySelector('.overlay');
     const closeButton = document.querySelector('.close-button');
 
+    // Remove todas as classes específicas
+    modal.classList.remove('projects-modal', 'blog-modal', 'music-modal', 'games-modal');
+
     // Pega a posição do card clicado
     const card = event.currentTarget;
     const rect = card.getBoundingClientRect();
+
+    // Adiciona a classe específica com base no ID do card
+    if (card.id === 'projects-card') {
+        modal.classList.add('projects-modal');
+    } else if (card.id === 'blog-card') {
+        modal.classList.add('blog-modal');
+    } else if (card.id === 'music-card') {
+        modal.classList.add('music-modal');
+    } else if (card.id === 'games-card') {
+        modal.classList.add('games-modal');
+    }
 
     // Posiciona o modal na frente do card clicado
     modal.style.top = `${rect.top + window.scrollY}px`;

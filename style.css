@@ -375,19 +375,20 @@ body {
 
 .modal {
     display: none;
-    position: absolute; /* Alterado para absolute */
+    position: absolute;
     z-index: 1050;
-    width: 300px; /* Tamanho menor */
-    background-color: rgba(0, 0, 0, 0.5);
-    justify-content: center;
-    align-items: center;
+    width: 250px; /* Tamanho menor */
+    background-color: rgba(255, 255, 255, 0.8); /* Mais transparente */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 15px;
+    transition: all 0.3s ease;
 }
 
 .modal-content {
-    background-color: #fefefe;
-    padding: 20px;
-    border: 1px solid #888;
-    border-radius: 10px;
+    background-color: transparent; /* Transparente para harmonizar com o modal */
+    padding: 0;
+    border: none;
     text-align: center;
     width: 100%;
 }
@@ -395,15 +396,15 @@ body {
 .close-button {
     color: #aaa;
     float: right;
-    font-size: 28px;
+    font-size: 20px;
     font-weight: bold;
+    cursor: pointer;
 }
 
 .close-button:hover,
 .close-button:focus {
-    color: black;
+    color: #000;
     text-decoration: none;
-    cursor: pointer;
 }
 
 .category-list {
@@ -414,12 +415,35 @@ body {
 
 .category-item {
     padding: 10px;
-    background-color: #ddd;
+    background-color: rgba(0, 0, 0, 0.1); /* Fundo mais claro */
     border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s, transform 0.3s;
+    color: #333;
 }
 
 .category-item:hover {
-    background-color: #ccc;
+    background-color: rgba(0, 0, 0, 0.2);
+    transform: translateY(-2px);
+}
+
+/* Estilos específicos para cada card */
+.modal.projects-modal {
+    top: 10px; /* Ajuste específico para o card de projetos */
+    left: 10px;
+}
+
+.modal.blog-modal {
+    top: 20px; /* Ajuste específico para o card de blog */
+    left: 20px;
+}
+
+.modal.music-modal {
+    top: 30px; /* Ajuste específico para o card de música */
+    left: 30px;
+}
+
+.modal.games-modal {
+    top: 40px; /* Ajuste específico para o card de jogos */
+    left: 40px;
 }
