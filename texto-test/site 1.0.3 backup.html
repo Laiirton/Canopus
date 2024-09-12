@@ -188,7 +188,7 @@
         <!-- Controle de tamanho do texto -->
         <div class="text-size-control">
             <label for="text-size">Tamanho do Texto:</label>
-            <input type="range" id="text-size" min="12" max="200" value="16">
+            <input type="range" id="text-size" min="12" max="70" value="16">
             <div class="size-display">16px</div>
         </div>
 
@@ -200,6 +200,7 @@
                 <option value="Times New Roman">Times New Roman</option>
                 <option value="Courier New">Courier New</option>
                 <option value="Georgia">Georgia</option>
+                <option value="Verdana">Verdana</option>
             </select>
         </div>
 
@@ -218,8 +219,6 @@
             <div class="carousel-item" contenteditable="true" data-index="0">Texto 1: Bem-vindo ao meu blog!</div>
             <div class="carousel-item" contenteditable="true" data-index="1">Texto 2: Compartilhando minhas experiências...</div>
             <div class="carousel-item" contenteditable="true" data-index="2">Texto 3: Últimas atualizações e notícias.</div>
-            <div class="carousel-item" contenteditable="true" data-index="3">Texto 4: Últimas atualizações e notícias.</div>
-
         </div>
     </div>
 
@@ -283,82 +282,123 @@
             }
         });
 
-        // CHECKPOINT ---------->
-        // CHECKPOINT ---------->
-
-        // CHECKPOINT ---------->
-
-        
-/// Função para criar e aplicar um novo elemento <span> com estilos específicos
-function applyStylesToSelection(newStyles) {
-    const selection = window.getSelection();
-    if (selection.rangeCount > 0) {
-        const range = selection.getRangeAt(0);
-        const selectedText = range.toString();
-        const span = document.createElement('span');
-
-        // Aplica os novos estilos diretamente, sem preservar os atuais
-        if (newStyles.fontSize) span.style.fontSize = newStyles.fontSize;
-        if (newStyles.fontFamily) span.style.fontFamily = newStyles.fontFamily;
-        if (newStyles.fontWeight) span.style.fontWeight = newStyles.fontWeight;
-        if (newStyles.fontStyle) span.style.fontStyle = newStyles.fontStyle;
-        if (newStyles.color) span.style.color = newStyles.color;
-
-        // Define o conteúdo do span com o texto selecionado
-        span.innerHTML = selectedText;
-
-        // Obtenha o estilo original do texto selecionado
-let parentElement = range.startContainer.parentElement;
-let originalFont = window.getComputedStyle(parentElement).fontFamily;
-
-        // Substitui o texto selecionado pelo novo elemento span
-        range.deleteContents();
-        range.insertNode(span);
-        // Aplica os novos estilos
-        span.appendChild(selectedText); // Insere o texto selecionado no novo span
-        Object.assign(span.style, newStyles);
-    }
-}
-//CHECKPOINT 2 //
-
-
 // Função para alterar o tamanho do texto selecionado
 const textSizeInput = document.getElementById('text-size');
 textSizeInput.addEventListener('input', () => {
     const size = textSizeInput.value;
     document.querySelector('.size-display').innerText = `${size}px`;
-    applyStylesToSelection({ fontSize: `${size}px` });
+    const selection = window.getSelection();
+    if (selection.rangeCount > 0) {
+        const range = selection.getRangeAt(0);
+        const selectedText = range.toString();
+        const span = document.createElement('span');
+        // Manter a fonte atual e outros estilos
+        const selectedElement = range.startContainer.parentNode;
+        span.style.fontSize = `${size}px`;
+        span.style.fontFamily = window.getComputedStyle(selectedElement).fontFamily;
+        span.style.fontWeight = window.getComputedStyle(selectedElement).fontWeight;
+        span.style.fontStyle = window.getComputedStyle(selectedElement).fontStyle;
+        span.style.lineHeight = window.getComputedStyle(selectedElement).lineHeight; // Preserva o espaçamento vertical
+        span.style.color = window.getComputedStyle(selectedElement).color; // Preserva a cor
+        span.innerHTML = selectedText;
+        range.deleteContents();
+        range.insertNode(span);
+    }
 });
 
 // Função para alterar a fonte do texto selecionado
 const fontSelect = document.getElementById('font-select');
 fontSelect.addEventListener('change', () => {
     const font = fontSelect.value;
-    applyStylesToSelection({ fontFamily: font });
+    const selection = window.getSelection();
+    if (selection.rangeCount > 0) {
+        const range = selection.getRangeAt(0);
+        const selectedText = range.toString();
+        const span = document.createElement('span');
+        // Manter o tamanho e o estilo de fonte atual
+        const selectedElement = range.startContainer.parentNode;
+        span.style.fontFamily = font;
+        span.style.fontSize = window.getComputedStyle(selectedElement).fontSize;
+        span.style.fontWeight = window.getComputedStyle(selectedElement).fontWeight;
+        span.style.fontStyle = window.getComputedStyle(selectedElement).fontStyle;
+        span.style.lineHeight = window.getComputedStyle(selectedElement).lineHeight; // Preserva o espaçamento vertical
+        span.style.color = window.getComputedStyle(selectedElement).color; // Preserva a cor
+        span.innerHTML = selectedText;
+        range.deleteContents();
+        range.insertNode(span);
+    }
 });
 
 // Função para aplicar estilo ao texto selecionado
 function applyStyle(style) {
-    if (style === 'fontWeight') {
-        applyStylesToSelection({ fontWeight: 'bold' });
-    } else if (style === 'fontStyle') {
-        applyStylesToSelection({ fontStyle: 'italic' });
-    } else if (style === 'normal') {    
-        applyStylesToSelection({ fontWeight: 'normal', fontStyle: 'normal' });
+    const selection = window.getSelection();
+    if (selection.rangeCount > 0) {
+        const range = selection.getRangeAt(0);
+        const selectedText = range.toString();
+        const span = document.createElement('span');
+        const selectedElement = range.startContainer.parentNode;
+        span.style.fontSize = window.getComputedStyle(selectedElement).fontSize;
+        span.style.fontFamily = window.getComputedStyle(selectedElement).fontFamily;
+        span.style.fontWeight = window.getComputedStyle(selectedElement).fontWeight;
+        span.style.fontStyle = window.getComputedStyle(selectedElement).fontStyle;
+        span.style.lineHeight = window.getComputedStyle(selectedElement).lineHeight; // Preserva o espaçamento vertical
+        span.style.color = window.getComputedStyle(selectedElement).color; // Preserva a cor
+        if (style === 'fontWeight') {
+            span.style.fontWeight = 'bold';
+        } else if (style === 'fontStyle') {
+            span.style.fontStyle = 'italic';
+        }
+        span.innerHTML = selectedText;
+        range.deleteContents();
+        range.insertNode(span);
     }
 }
 
 // Controles de negrito, itálico e normal
 document.getElementById('bold-btn').addEventListener('click', () => applyStyle('fontWeight'));
 document.getElementById('italic-btn').addEventListener('click', () => applyStyle('fontStyle'));
-document.getElementById('normal-btn').addEventListener('click', () => applyStyle('normal'));
+document.getElementById('normal-btn').addEventListener('click', () => {
+    const selection = window.getSelection();
+    if (selection.rangeCount > 0) {
+        const range = selection.getRangeAt(0);
+        const selectedText = range.toString();
+        const span = document.createElement('span');
+        const selectedElement = range.startContainer.parentNode;
+        span.style.fontSize = window.getComputedStyle(selectedElement).fontSize;
+        span.style.fontFamily = window.getComputedStyle(selectedElement).fontFamily;
+        span.style.fontWeight = 'normal';
+        span.style.fontStyle = 'normal';
+        span.style.lineHeight = window.getComputedStyle(selectedElement).lineHeight; // Preserva o espaçamento vertical
+        span.style.color = window.getComputedStyle(selectedElement).color; // Preserva a cor
+        span.innerHTML = selectedText;
+        range.deleteContents();
+        range.insertNode(span);
+    }
+});
 
 // Função para alterar a cor do texto selecionado
 const colorPicker = document.getElementById('color-picker');
 colorPicker.addEventListener('input', () => {
     const color = colorPicker.value;
-    applyStylesToSelection({ color: color });
+    const selection = window.getSelection();
+    if (selection.rangeCount > 0) {
+        const range = selection.getRangeAt(0);
+        const selectedText = range.toString();
+        const span = document.createElement('span');
+        const selectedElement = range.startContainer.parentNode;
+        span.style.fontSize = window.getComputedStyle(selectedElement).fontSize;
+        span.style.fontFamily = window.getComputedStyle(selectedElement).fontFamily;
+        span.style.fontWeight = window.getComputedStyle(selectedElement).fontWeight;
+        span.style.fontStyle = window.getComputedStyle(selectedElement).fontStyle;
+        span.style.lineHeight = window.getComputedStyle(selectedElement).lineHeight; // Preserva o espaçamento vertical
+        span.style.color = color;
+        span.innerHTML = selectedText;
+        range.deleteContents();
+        range.insertNode(span);
+    }
 });
+
+
 
 
     </script>
