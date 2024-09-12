@@ -1,773 +1,112 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Matheus Santos' Creative Space</title>
-        <link
-            rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-        />
-        <style>
-            @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&display=swap");
 
-            html,
-            body {
-                height: 100%;
-                margin: 0;
-                padding: 0;
-                font-family: "Montserrat", sans-serif;
-                overflow: hidden;
-            }
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Matheus Santos' Creative Space</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+</head>
 
-            body {
-                background-image: url("/assets/images/bg-color9.1.png");
-                background-size: cover;
-                background-position: center;
-                background-repeat: no-repeat;
-                color: #fff;
-                display: flex;
-                flex-direction: column;
-                transition: background-color 0.3s ease;
-            }
+<body>
+    <!-- Adicione esta linha logo após a abertura da tag body -->
+    <div class="overlay"></div>
 
-   /* Carregamento Minecraft */
-   #loading-screen {
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                background-color: #000000;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                flex-direction: column; /* Alinha itens na vertical */
-                z-index: 1000;
-            }
+    <!-- Tela de carregamento -->
+    <div id="loading-screen">
+        <!--GIF ao lado -->
+        <div class="gif-container">
+            <img src="/assets/images/Cube-anim2.gif" alt="Loading" class="loading-gif">
+        </div>
+        <!--GIF ao lado -->
 
-            /* Contêiner para o GIF */
-            .gif-container {
-                position: absolute;
-                top: 50%; /* Ajuste a posição vertical conforme necessário */
-                left: 50%; /* Ajuste a posição horizontal conforme necessário */
-                transform: translate( -180%, -175%); /* Centraliza o GIF */}
+        <div id="loading-text">Loading...</div>
+        <div id="loading-percentage">0%</div>
 
-             /* Estilo para o GIF */
-            .loading-gif {
-                width: 125px; /* Ajuste o tamanho do GIF conforme necessário */
-                height: 125px; /* Ajuste o tamanho do GIF conforme necessário */
-            }
+        <div class="minecraft-loader">
+            <div class="block"></div>
+            <div class="block"></div>
+            <div class="block"></div>
+            <div class="block"></div>
+            <div class="block"></div>
+        </div>
+    </div>
 
-
-            #loading-text {
-                font-size: 3.5rem;
-                color: #f00e33;
-                margin-bottom: 35px;
-                margin-top: 75px; /* Ajuste a margem superior para espaçar do GIF */
-                z-index: 1; /* Garante que o texto fique acima do GIF */
-                transition: all 0.5s ease; /* Suaviza a transição entre os estilos */
-
-            }
-
-            #loading-percentage {
-            font-size: 2.5rem;
-            color: #f00e33;
-            margin-bottom: 90px; /* Espaçamento entre o texto e os blocos */
-            z-index: 1; /* Garante que o texto fique acima do GIF */
-
-        }
-
-          :root {
-        --block-size: 50px;
-        --block-color: #fcc319;
-         }
-
-            .minecraft-loader {
-                display: flex;
-                justify-content: space-between;
-                width: var(--loader-width); /* Largura ajustável baseada na porcentagem */
-                margin-top: -40px;
-                gap:  15px; /* Ajuste o valor conforme necessário */
-
-            }
-
-            .block {
-                width: var(--block-size);
-                height: var(--block-size);
-                background-color: #fcc319;
-                border: 2px solid #000;
-                animation: wave 1.0s infinite;
-                transform: rotateX(90deg) rotateY(240deg);
-
-            }
-
-            .block:nth-child(1) {
-                background-color: #d41313; /* Cor para o primeiro bloco */
-            }
-
-            .block:nth-child(2) {
-                animation-delay: 0.1s;
-                background-color: #430707; /* Cor para o segundo bloco */
-
-            }
-
-            .block:nth-child(3) {
-                animation-delay: 1.0s;
-                background-color: #f18883; /* Cor para o terceiro bloco */ 
-
-            }
-            .block:nth-child(4) {
-                animation-delay: 2.0s;
-                background-color: #fedd24; /* Cor para o quarto bloco */
-            }
-
-            .block:nth-child(5) {
-                animation-delay: 3.0s;
-                background-color: #0225b1; /* Cor para o quarto bloco */
-            }
-
-            /* Animação de onda */
-            @keyframes wave {
-                0%, 100% {
-                    transform: scaleY(1);
-                }
-                50% {
-                    transform: scaleY(1.5);
-                }
-            }
-
-            @keyframes bounce {
-                0%, 20%, 50%, 80%, 100% {
-                    transform: translateY(0);
-                }
-                40% {
-                    transform: translateY(-35px);
-                }
-                60% {
-                    transform: translateY(-55px);
-                }
-            }
-
-
-            .container {
-                flex: 1;
-                display: flex;
-                flex-direction: column;
-                justify-content: flex-start;
-                align-items: center;
-                padding: 20px;
-                position: relative;
-            }
-
-            .social-icons {
-                position: absolute;
-                top: 20px;
-                left: 20px;
-                display: flex;
-                gap: 15px;
-            }
-
-            .social-icons a {
-                color: #fff;
-                font-size: 20px;
-                transition: color 0.3s ease;
-            }
-
-            .social-icons a:hover {
-                color: #e94560;
-            }
-
-            .welcome-text {
-                font-size: 1.3vw;
-                font-weight: 600;
-                margin-top: 5vh;
-                margin-bottom: 4vh;
-                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-                text-align: center;
-                transition: color 0.3s ease;
-            }
-
-            .characters {
-                display: flex;
-                justify-content: center;
-                gap: 2vw;
-                flex-wrap: wrap;
-            }
-
-            .character {
-                text-align: center;
-                transition: all 0.3s ease;
-                cursor: pointer;
-                width: 22vw;
-            }
-
-            .character:hover {
-                transform: translateY(-50px);
-            }
-
-            .character img {
-                width: 100%;
-                height: 48vh;
-                object-fit: cover;
-                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-                border-radius: 10px;
-            }
-
-            /* Cards Shapes */
-
-            #projects-card:hover img {
-                height: 60vh;
-                clip-path: polygon(75% -100%, 100% 75%, -25% 100%);
-            }
-
-            #blog-card:hover img {
-                height: 60vh;
-                clip-path: ellipse(50% 100% at 50% 50%);
-            }
-
-            #music-card:hover img {
-                height: 60vh;
-                clip-path: polygon(25% 0%, 100% 0%, 75% 100%, 0% 100%);
-            }
-
-            #games-card:hover img {
-                height: 60vh;
-                clip-path: polygon(20% 0%, 0% 20%, 30% 50%, 0% 80%, 20% 100%, 50% 70%, 80% 100%, 100% 80%, 70% 50%, 100% 20%, 80% 0%, 50% 30%);
-            }
-
-            .character-text {
-                margin-top: 1vh;
-                font-size: 2.3vw;
-                font-weight: 325;
-                transition: color 0.3s ease;
-            }
-
-            .footer {
-                text-align: center;
-                padding: 10px;
-                font-size: 0.8vw;
-                background-color: rgba(0, 0, 0, 0.5);
-            }
-
-            @media (max-aspect-ratio: 1/1) {
-                .social-icons {
-                    top: 10px;
-                    left: 10px;
-                }
-
-                .social-icons a {
-                    font-size: 20px;
-                }
-
-                .characters {
-                    flex-direction: column;
-                    gap: 2vh;
-                }
-
-                .character {
-                    width: 80vw;
-                }
-
-                .character img {
-                    height: 25vh;
-                }
-
-                .welcome-text {
-                    font-size: 5vw;
-                    margin-top: 10vh;
-                }
-
-                .character-text {
-                    font-size: 3vw;
-                }
-
-                .footer {
-                    font-size: 2vw;
-                }
-            }
-        </style>
-    </head>
-    <body>
-
-           <!-- Tela de carregamento -->
-           <div id="loading-screen">
-
-                <!--GIF ao lado -->
-            <div class="gif-container">
-                <img src="/assets/images/Cube-anim2.gif" alt="Loading" class="loading-gif">
-            </div>
-                 <!--GIF ao lado -->
-
-            <div id="loading-text">Loading...</div>
-            <div id="loading-percentage">0%</div>
-
-            <div class="minecraft-loader">
-                <div class="block"></div>
-                <div class="block"></div>
-                <div class="block"></div>
-                <div class="block"></div>
-                <div class="block"></div>
+    <div id="category-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <div class="category-list">
+                <div class="category-item">Categoria 1</div>
+                <div class="category-item">Categoria 2</div>
+                <div class="category-item">Categoria 3</div>
             </div>
         </div>
+    </div>
 
+    <div class="container">
+        <div class="social-icons">
+            <a href="https://canopusart.neocities.org/contact" target="_blank" title="Email"><i
+                    class="fas fa-envelope"></i></a>
+            <a href="https://twitter.com/canopusart" target="_blank" title="Twitter"><i class="fab fa-twitter"></i></a>
+            <a href="https://www.instagram.com/artcanopus" target="_blank" title="Instagram"><i
+                    class="fab fa-instagram"></i></a>
+            <a href="https://www.youtube.com/@canopusart" target="_blank" title="YouTube"><i
+                    class="fab fa-youtube"></i></a>
+        </div>
 
-        <div class="container">
-            <div class="social-icons">
-                <a
-                    href="https://canopusart.neocities.org/contact"
-                    target="_blank"
-                    title="Email"
-                    ><i class="fas fa-envelope"></i
-                ></a>
-                <a
-                    href="https://twitter.com/canopusart"
-                    target="_blank"
-                    title="Twitter"
-                    ><i class="fab fa-twitter"></i
-                ></a>
-                <a
-                    href="https://www.instagram.com/artcanopus"
-                    target="_blank"
-                    title="Instagram"
-                    ><i class="fab fa-instagram"></i
-                ></a>
-                <a
-                    href="https://www.youtube.com/@canopusart"
-                    target="_blank"
-                    title="YouTube"
-                    ><i class="fab fa-youtube"></i
-                ></a>
+        <p class="welcome-text">Welcome to my creative space</p>
+
+        <div class="characters">
+            <div class="character" id="projects-card" 
+                onmouseover="changeImagesAndBackground('projects')" onmouseout="resetImages()">
+                <img src="/assets/images/projects2.jpg" alt="Projects" loading="lazy" />
+                <p class="character-text">Projects</p>
+                <div class="category-selector">
+                    <div class="category-item">Category 1</div>
+                    <div class="category-item">Category 2</div>
+                    <div class="category-item">Category 3</div>
+                </div>
             </div>
-
-            <p class="welcome-text">Welcome to my creative space</p>
-
-            <div class="characters">
-                <div
-                    class="character"
-                    id="projects-card"
-                    onclick="setPermanentState('projects')"
-                    onmouseover="changeImagesAndBackground('projects')"
-                    onmouseout="resetImages()"
-                    >
-                    <a href="https://canopusart.neocities.org/Abyss-ImportantChar">
-                    <img src="/assets/images/projects2.jpg" alt="Projects" loading="lazy" />
-                    </a>
-                    <p class="character-text">Projects</p>
+            <div class="character" id="blog-card" 
+                onmouseover="changeImagesAndBackground('blog')" onmouseout="resetImages()">
+                <img src="/assets/images/blog2.jpg" alt="Blog" loading="lazy" />
+                <p class="character-text">Blog</p>
+                <div class="category-selector">
+                    <div class="category-item">Category 1</div>
+                    <div class="category-item">Category 2</div>
+                    <div class="category-item">Category 3</div>
                 </div>
-                <div
-                    class="character"
-                    id="blog-card"
-                    onclick="setPermanentState('blog')"
-                    onmouseover="changeImagesAndBackground('blog')"
-                    onmouseout="resetImages()"
-                >
-                     <a href="https://canopusart.neocities.org/Blog">
-                    <img src="/assets/images/blog2.jpg" alt="Blog" loading="lazy" />
-                    </a>
-                    <p class="character-text">Blog</p>
+            </div>
+            <div class="character" id="music-card" 
+                onmouseover="changeImagesAndBackground('music')" onmouseout="resetImages()">
+                <img src="/assets/images/music2.jpg" alt="Music" loading="lazy" />
+                <p class="character-text">Music</p>
+                <div class="category-selector">
+                    <div class="category-item">Category 1</div>
+                    <div class="category-item">Category 2</div>
+                    <div class="category-item">Category 3</div>
                 </div>
-                <div
-                    class="character"
-                    id="music-card"
-                    onclick="setPermanentState('music')"
-                    onmouseover="changeImagesAndBackground('music')"
-                    onmouseout="resetImages()"
-                >
-                    <a href="https://canopusart.neocities.org/Music">
-                    <img src="/assets/images/music2.jpg" alt="Music" loading="lazy" />
-                    </a>
-                    <p class="character-text">Music</p>
-                </div>
-                <div
-                    class="character"
-                    id="games-card"
-                    onclick="setPermanentState('games')"
-                    onmouseover="changeImagesAndBackground('games')"
-                    onmouseout="resetImages()"
-                >   <a href="https://canopusart.neocities.org/Games">
-                    <img src="/assets/images/games3.jpg" alt="Games" loading="lazy" />
-                    </a>
-                    <p class="character-text">Games</p>
-                    </a>
+            </div>
+            <div class="character" id="games-card" 
+                onmouseover="changeImagesAndBackground('games')" onmouseout="resetImages()">
+                <img src="/assets/images/games3.jpg" alt="Games" loading="lazy" />
+                <p class="character-text">Games</p>
+                <div class="category-selector">
+                    <div class="category-item">Category 1</div>
+                    <div class="category-item">Category 2</div>
+                    <div class="category-item">Category 3</div>
                 </div>
             </div>
         </div>
+    </div>
 
-        <footer class="footer">
-            <p>© 2024 Matheus Santos | @canopus</p>
-        </footer>
+    <footer class="footer">
+        <p>© 2024 Matheus Santos | @canopus</p>
+    </footer>
 
-        <script>
-            let permanentState = null;
-            let imageCache = {};
+    <script src="script.js"></script>
+</body>
 
-            function preloadImages() {
-                const imagePaths = [
-                    "/assets/images/projects2.jpg",
-                    "/assets/images/blog2.jpg",
-                    "/assets/images/music2.jpg",
-                    "/assets/images/games3.jpg",
-                    "/assets/images/projects_select.jpg",
-                    "/assets/images/blog_posterize_brown.jpg",
-                    "/assets/images/music_posterize_brown.jpg",
-                    "/assets/images/games_brown.jpg",
-                    "/assets/images/blog_select.jpg",
-                    "/assets/images/projects_yellow.jpg",
-                    "/assets/images/music_yellow2.jpg",
-                    "/assets/images/games_yellow.jpg",
-                    "/assets/images/music.jpg",
-                    "/assets/images/projects_blue.jpg",
-                    "/assets/images/blog_blue.jpg",
-                    "/assets/images/games_blue.jpg",
-                    "/assets/images/games.png",
-                    "/assets/images/projects_red.jpg",
-                    "/assets/images/blog_red.jpg",
-                    "/assets/images/music_red.jpg"
-                ];
-
-                imagePaths.forEach(path => {
-                    const img = new Image();
-                    img.src = path;
-                    imageCache[path] = img;
-                });
-            }
-
-            window.addEventListener('load', preloadImages);
-
-            function changeImagesAndBackground(category) {
-                if (permanentState) return;
-                changeImages(category);
-                changeBackground(category);
-                changeTextColors(category);
-            }
-
-            function setPermanentState(category) {
-                permanentState = category;
-                changeImages(category);
-                changeBackground(category);
-                changeTextColors(category);
-            }
-
-            function resetImages() {
-                if (permanentState) return;
-                setImage("projects-card", "/assets/images/projects2.jpg");
-                setImage("blog-card", "/assets/images/blog2.jpg");
-                setImage("music-card", "/assets/images/music2.jpg");
-                setImage("games-card", "/assets/images/games3.jpg");
-                resetBackground();
-                resetTextColors();
-            }
-
-            function setImage(cardId, imagePath) {
-                const img = document.getElementById(cardId).querySelector("img");
-                if (imageCache[imagePath]) {
-                    img.src = imageCache[imagePath].src;
-                } else {
-                    img.src = imagePath;
-                }
-            }
-
-            function changeImages(category) {
-                if (category === "projects") {
-                    setImage("projects-card", "/assets/images/projects_select.jpg");
-                    setImage("blog-card", "/assets/images/blog_posterize_brown.jpg");
-                    setImage("music-card", "/assets/images/music_posterize_brown.jpg");
-                    setImage("games-card", "/assets/images/games_brown.jpg");
-                } else if (category === "blog") {
-                    setImage("blog-card", "/assets/images/blog_select.jpg");
-                    setImage("projects-card", "/assets/images/projects_yellow.jpg");
-                    setImage("music-card", "/assets/images/music_yellow2.jpg");
-                    setImage("games-card", "/assets/images/games_yellow.jpg");
-                } else if (category === "music") {
-                    setImage("music-card", "/assets/images/music.jpg");
-                    setImage("projects-card", "/assets/images/projects_blue.jpg");
-                    setImage("blog-card", "/assets/images/blog_blue.jpg");
-                    setImage("games-card", "/assets/images/games_blue.jpg");
-                } else if (category === "games") {
-                    setImage("games-card", "/assets/images/games.png");
-                    setImage("projects-card", "/assets/images/projects_red.jpg");
-                    setImage("blog-card", "/assets/images/blog_red.jpg");
-                    setImage("music-card", "/assets/images/music_red.jpg");
-                }
-            }
-
-            function changeBackground(category) {
-                if (category === "projects") {
-                    document.body.style.backgroundImage = "none";
-                    document.body.style.backgroundColor = "#211412";
-                } else if (category === "blog") {
-                    document.body.style.backgroundImage = "none";
-                    document.body.style.backgroundColor = "#ed943b";
-                } else if (category === "music") {
-                    document.body.style.backgroundImage = "none";
-                    document.body.style.backgroundColor = "#0e44c2";
-                } else if (category === "games") {
-                    document.body.style.backgroundImage = "none";
-                    document.body.style.backgroundColor = "#e81010";
-                }
-            }
-
-            function resetBackground() {
-                if (permanentState) return;
-                document.body.style.backgroundImage = 'url("/assets/images/bg-color9.1.png")';
-                document.body.style.backgroundColor = "";
-            }
-
-            function changeTextColors(category) {
-    // Seleciona os elementos de texto relevantes
-    const welcomeText = document.querySelector('.welcome-text');
-    const characterTexts = document.querySelectorAll('.character-text');
-    let highlightColor, otherColor, highlightFontSize, otherFontSize, highlightPosition, otherPosition;
-    let highlightRotate, otherRotate;
-    let highlightTranslateX, highlightTranslateY, otherTranslateX, otherTranslateY;
-    let highlightFontFamily, otherFontFamily;
-    let highlightFontWeight, otherFontWeight;
-    let highlightFontStyle, otherFontStyle;
-
-    // Define as cores, tamanhos de fonte, posições, rotação, deslocamento e fonte para o card destacado e os outros cards
-    switch (category) {
-        case 'projects':
-            highlightColor = '#ff470a';
-            otherColor = '#8B4513';
-            highlightFontSize = '4.5vw';  // Tamanho do texto do card selecionado
-            otherFontSize = '2.0vw';      // Tamanho do texto dos outros cards
-            highlightPosition = 'absolute'; // Posição destacada
-            otherPosition = 'relative';    // Posição padrão
-            highlightRotate = '340deg';     // Ângulo de rotação para o card destacado
-            otherRotate = '0deg';         // Ângulo de rotação para os outros cards
-            highlightTranslateX = '120px'; // Deslocamento horizontal para o card destacado
-            highlightTranslateY = '-30px'; // Deslocamento vertical para o card destacado
-            otherTranslateX = '0px';     // Deslocamento horizontal para os outros cards
-            otherTranslateY = '0px';     // Deslocamento vertical para os outros cards
-            highlightFontFamily = 'Bahnschrift Condensed'; // Família da fonte para o card destacado
-            otherFontFamily = 'Georgia, serif'; // Família da fonte para os outros cards
-            highlightFontWeight = 'bold'; // Peso da fonte para o card destacado
-            otherFontWeight = 'normal';   // Peso da fonte para os outros cards
-            highlightFontStyle = 'italic'; // Estilo da fonte para o card destacado
-            otherFontStyle = 'normal';    // Estilo da fonte para os outros cards
-
-            break;
-        case 'blog':
-            highlightColor = '#ffd700';
-            otherColor = '#4B0082';
-            highlightFontSize = '5.0vw';
-            otherFontSize = '2.0vw';
-            highlightPosition = 'static';
-            otherPosition = 'static';
-            highlightRotate = '0deg';
-            otherRotate = '0deg';
-            highlightTranslateX = ' -5px';
-            highlightTranslateY = ' -10px';
-            otherTranslateX = '0px';
-            otherTranslateY = '0px';
-            highlightFontFamily = 'Gentium Basic';
-            otherFontFamily = 'Courier New, monospace';
-            highlightFontWeight = 'bold';
-            otherFontWeight = 'normal';
-            highlightFontStyle = 'italic';
-            otherFontStyle = 'normal';
-            break;
-        case 'music':
-            highlightColor = '#4e9af1';
-            otherColor = '#FF6347';
-            highlightFontSize = '4.0vw';
-            otherFontSize = '2.0vw';
-            highlightPosition = 'absolute';
-            otherPosition = 'relative';
-            highlightRotate = '0deg';
-            otherRotate = '0deg';
-            highlightTranslateX = '100px';
-            highlightTranslateY = ' -20px';
-            otherTranslateX = '0px';
-            otherTranslateY = '0px';
-            highlightFontFamily = 'Corbel Light, sans-serif';
-            otherFontFamily = 'Courier New, monospace';
-            highlightFontWeight = 'normal';
-            otherFontWeight = 'normal';
-            highlightFontStyle = 'italic';
-            otherFontStyle = 'normal';
-            break;
-        case 'games':
-            highlightColor = '#32cd32';
-            otherColor = '#8A2BE2';
-            highlightFontSize = '6.0vw';
-            otherFontSize = '2.5vw';
-            highlightPosition = 'static';
-            otherPosition = 'static';
-            highlightRotate = '0deg';
-            otherRotate = '0deg';
-            highlightTranslateX = '0px';
-            highlightTranslateY = '-250px';
-            otherTranslateX = '0px';
-            otherTranslateY = '0px';
-            highlightFontFamily = 'Impact, sans-serif';
-            otherFontFamily = 'Arial, sans-serif';
-            highlightFontWeight = 'bold';
-            otherFontWeight = 'normal';
-            highlightFontStyle = 'bold';
-            otherFontStyle = 'normal';
-            break;
-        default:
-            highlightColor = '#fff';
-            otherColor = '#fff';
-            highlightFontSize = '2.0vw';
-            otherFontSize = '2.0vw';
-            highlightPosition = 'static';
-            otherPosition = 'static';
-            highlightRotate = '0deg';
-            otherRotate = '0deg';
-            highlightTranslateX = '0px';
-            highlightTranslateY = '0px';
-            otherTranslateX = '0px';
-            otherTranslateY = '0px';
-            highlightFontFamily = 'sans-serif';
-            otherFontFamily = 'sans-serif';
-            highlightFontWeight = 'normal';
-            otherFontWeight = 'normal';
-            highlightFontStyle = 'normal';
-            otherFontStyle = 'normal';
-    }
-
-    // Aplica cor, tamanho de fonte, posição, rotação, deslocamento, e fonte para o welcome e para os outros cards
-    welcomeText.style.color = otherColor;
-    welcomeText.style.position = otherPosition; // Aplica a posição padrão
-    welcomeText.style.transform = `rotate(${otherRotate}) translate(${otherTranslateX}, ${otherTranslateY})`; // Aplica rotação e deslocamento
-    welcomeText.style.fontFamily = otherFontFamily; // Aplica a família da fonte padrão
-    welcomeText.style.fontWeight = otherFontWeight; // Aplica o peso da fonte padrão
-    welcomeText.style.fontStyle = otherFontStyle; // Aplica o estilo da fonte padrão
-
-    characterTexts.forEach(text => {
-        if (text.parentElement.id === `${category}-card`) {
-            text.style.color = highlightColor;  // Seta a cor destacada para o card selecionado
-            text.style.fontSize = highlightFontSize;  // Seta o tamanho da fonte destacada
-            text.style.position = highlightPosition;  // Aplica a posição destacada
-            text.style.transform = `rotate(${highlightRotate}) translate(${highlightTranslateX}, ${highlightTranslateY})`; // Aplica rotação e deslocamento
-            text.style.fontFamily = highlightFontFamily; // Aplica a família da fonte destacada
-            text.style.fontWeight = highlightFontWeight; // Aplica o peso da fonte destacado
-            text.style.fontStyle = highlightFontStyle; // Aplica o estilo da fonte destacado
-        } else {
-            text.style.color = otherColor;      // Seta a cor padrão para os outros cards e título
-            text.style.fontSize = otherFontSize;  // Seta o tamanho da fonte padrão
-            text.style.position = otherPosition;  // Aplica a posição padrão
-            text.style.transform = `rotate(${otherRotate}) translate(${otherTranslateX}, ${otherTranslateY})`; // Aplica rotação e deslocamento
-            text.style.fontFamily = otherFontFamily; // Aplica a família da fonte padrão
-            text.style.fontWeight = otherFontWeight; // Aplica o peso da fonte padrão
-            text.style.fontStyle = otherFontStyle; // Aplica o estilo da fonte padrão
-        }
-    });
-}
-
-function resetTextColors() {
-    if (permanentState) return;
-    const welcomeText = document.querySelector('.welcome-text');
-    const characterTexts = document.querySelectorAll('.character-text');
-
-    welcomeText.style.color = '#fff';
-    welcomeText.style.position = 'static'; // Reseta a posição para padrão
-    welcomeText.style.transform = 'rotate(0deg) translate(0px, 0px)'; // Reseta rotação e deslocamento
-    welcomeText.style.fontFamily = 'sans-serif'; // Reseta a família da fonte padrão
-    welcomeText.style.fontWeight = 'normal'; // Reseta o peso da fonte padrão
-    welcomeText.style.fontStyle = 'normal'; // Reseta o estilo da fonte padrão
-
-    characterTexts.forEach(text => {
-        text.style.color = '#fff';
-        text.style.fontSize = '2.3vw';  // Tamanho de fonte padrão
-        text.style.position = 'static'; // Reseta a posição para padrão
-        text.style.transform = 'rotate(0deg) translate(0px, 0px)'; //
-    });
-    }
-
-    // Mudando os blocos //
-    function updateBlockStyles(percentage) {
-    // Limita a porcentagem entre 0 e 100
-    percentage = Math.min(100, Math.max(0, percentage));
-    let newSize;
-    if (percentage <= 25) {
-        newSize = 50; // Tamanho para 0-25%
-    } else if (percentage <= 50) {
-        newSize = 40; // Tamanho para 26-50%
-    } else if (percentage <= 75) {
-        newSize = 30; // Tamanho para 51-75%
-    } else {
-        newSize = 25; // Tamanho para 76-100%
-    }
-    const newColor = `rgb(${255 - percentage * 2.55}, ${percentage * 2.55}, 0)`; // Gradiente de verde para vermelho
-
-  // Define a largura com base na faixa de porcentagem
-  let newWidth;
-    if (percentage <= 25) {
-        newWidth = 100; // Largura para 0-25%
-    } else if (percentage <= 50) {
-        newWidth = 105; // Largura para 26-50%
-    } else if (percentage <= 75) {
-        newWidth = 115; // Largura para 51-75%
-    } else {
-        newWidth = 125; // Largura para 76-100%
-    }
-
-    // Atualiza as variáveis CSS
-    document.documentElement.style.setProperty('--block-size', `${newSize}px`);
-    document.documentElement.style.setProperty('--block-color', newColor);
-    document.documentElement.style.setProperty('--loader-width', `${newWidth}px`);
-
-}
-
-// Exemplo de uso: atualiza o estilo dos blocos com base em 75%
-// Pode ser substituído por um valor dinâmico ou evento
-updateBlockStyles(0);
-
-    document.addEventListener('DOMContentLoaded', () => {
-                setTimeout(() => {
-                    document.getElementById('loading-screen').style.display = 'none';
-                    document.querySelector('.container').style.display = 'flex';
-                }, 3500); // Ajuste o tempo conforme necessário
-            });
-
-            let percentage = 0;
-                const loadingText = document.getElementById('loading-text');
-                const loadingPercentage = document.getElementById('loading-percentage');
-                const loadingScreen = document.getElementById('loading-screen');
-                const messages = [
-                { text: " Carregando..", fontSize: "3.7rem", color: "#f00e33", backgroundColor: "#000000" },
-                { text: "✨Aesthetics", fontSize: "7.5rem", color: "#f9c74f", backgroundColor: "#f2998f" },
-                { text: "🎨Dreams..", fontSize: "6.5rem", color: "#00f5e9", backgroundColor: "#66b0ff" },
-                { text: "💡Inspiration...", fontSize: "4.0rem", color: "#4aff7d", backgroundColor: "#e8b409 " },
-                { text: "🧠Creativity input!", fontSize: "3.5rem", color: "#ff00a2", backgroundColor: "#9000ff"}
-            ];
-
-            const updateLoading = () => {
-
-                if (percentage < 100) {
-                    percentage += 1; // Incrementa a porcentagem
-                    loadingPercentage.textContent = `${percentage}%`;
-
-                      // Atualiza o texto de carregamento com base na porcentagem
-                      if (percentage % 18 === 0) { // Muda a cada 20%
-                        const messageIndex = percentage / 18- 1;
-                        const message = messages[messageIndex];
-
-                        loadingText.textContent = message.text;
-                        loadingText.style.fontSize = message.fontSize;
-                        loadingText.style.color = message.color;
-                        loadingPercentage.style.color = message.color; // Atualiza a cor do texto da porcentagem
-                        loadingScreen.style.backgroundColor = message.backgroundColor;
-
-                    }
-
-                     // Atualiza o estilo dos blocos com base na porcentagem
-                    updateBlockStyles(percentage);
-
-                    // Simula uma atualização do carregamento
-                    setTimeout(updateLoading, 30); // Ajuste o intervalo conforme necessário
-                } else {
-                    document.getElementById('loading-screen').style.display = 'none';
-                    document.querySelector('.container').style.display = 'flex';
-                }
-                 };
-
-            updateLoading();
-
-        </script>
-    </body>
 </html>
